@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Primi romani 2x1 — Romano Vino e Cucina, Roma San Giovanni</title>
+<meta name="description" content="Offerta esclusiva da Romano Vino e Cucina, Via Taranto a San Giovanni (Roma): ordina due primi tipici romani, uno te lo offriamo noi. Solo 25 coupon, fino a fine ottobre.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* Romano Vino e Cucina — landing "Primi romani 2x1".
+   Stessa struttura delle landing I Love Meat, palette bordeaux + oro. */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1c0a10;--bg2:#260e16;--card:#2e121b;--line:#4a1f2b;
+  --bordeaux:#7a1a2e;--bordeaux-2:#9a2940;
+  --text:#f6ede4;--muted:#b9a39e;
+  --gold:#c9a24a;--gold-2:#e0bf6b;--gold-d:#8a6a1e;
+  --ink-cta:#2a0c14;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --radius:16px
+}
+html{scroll-behavior:smooth}
+/* offset per il nav fisso: le ancore non finiscono sotto la barra */
+#offerta,#coupon{scroll-margin-top:88px}
+body{background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.display{font-family:"Anton","Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:1.08}
+.kicker{color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border:none;border-radius:999px;background:#fff;color:var(--bordeaux);font-family:"Anton","Arial Narrow",sans-serif;font-size:18px;font-weight:400;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:.15s;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+/* CTA bianche con scritta bordeaux: si leggono sia sul fondo scuro sia sull'oro */
+.btn:hover{background:#f6ece4;transform:translateY(-1px)}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(201,162,74,.5);border-radius:999px;color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(201,162,74,.08)}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,162,74,.55)}70%{box-shadow:0 0 0 7px rgba(201,162,74,0)}100%{box-shadow:0 0 0 0 rgba(201,162,74,0)}}
+
+/* ---- NAV ---- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;background:transparent;border-bottom:1px solid transparent;transition:background .25s,border-color .25s}
+.nav.scrolled{background:rgba(28,10,16,.86);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+/* logo ufficiale (targa bordeaux con scritta panna): alto 48px, largo in proporzione */
+.nav .logo{display:block;line-height:0}
+.nav .logo img{height:48px;width:auto;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.nav .btn{padding:11px 22px;font-size:17px}
+
+/* ---- HERO ---- */
+/* Se hero.jpg manca, resta il fondo bordeaux sfumato: la pagina sta in piedi
+   anche senza foto. */
+.hero{position:relative;overflow:hidden;min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:104px 0 60px;
+  background:radial-gradient(90% 70% at 50% 30%,#5a1323,#2a0c14 60%,var(--bg))}
+/* foto verticale (tre primi dall'alto): su schermi larghi "cover" taglia sopra
+   e sotto, quindi tengo l'inquadratura sopra il centro, dove stanno i piatti,
+   e il logo in fondo alla foto resta fuori. */
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:brightness(.62) saturate(1.1) contrast(1.04);z-index:0}
+/* velo bordeaux: tinge la foto con il colore del locale e tiene leggibile il copy */
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,8,18,.6),rgba(60,12,26,.35) 45%,rgba(28,10,16,.96) 97%)}
+.hero-inner{position:relative;z-index:2;max-width:1120px}
+.hero .badge{margin-bottom:18px;background:rgba(28,10,16,.55);backdrop-filter:blur(4px)}
+.hero h1,.hero .riga-2x1{font-size:clamp(52px,7.2vw,108px);text-shadow:0 2px 10px rgba(0,0,0,.85),0 4px 40px rgba(0,0,0,.7)}
+/* seconda riga del titolo più piccola: è lunga, a piena misura andrebbe su tre righe */
+.hero h1 .l2{display:block;color:var(--gold);font-size:.56em;margin-top:.18em}
+/* "Prendi 2 primi, ne paghi 1." è l'offerta: deve vincere su tutto. Targa oro
+   piena con scritta bordeaux, niente ombra sul testo (sul pieno non serve) e
+   un alone scuro intorno per staccarla dalla foto. */
+.hero .riga-2x1{margin:14px 0 24px}
+.hero .riga-2x1 .l2{display:inline-block;font-size:.72em;line-height:1.05;color:var(--ink-cta);
+  background:linear-gradient(180deg,var(--gold-2),var(--gold));padding:.16em .5em .12em;border-radius:.16em;
+  text-shadow:none;box-shadow:0 0 0 3px rgba(224,191,107,.28),0 14px 40px rgba(0,0,0,.6);transform:rotate(-1.5deg)}
+.hero .riga-2x1 .l2 em{font-style:normal;color:var(--bordeaux)}
+/* a capo solo su mobile: così l'"1." non resta da solo sulla seconda riga */
+.hero .a-capo{display:none}
+.hero .lead{color:#f7ece4;font-size:19px;max-width:40ch;margin:20px auto 0;text-shadow:0 1px 6px rgba(0,0,0,.9),0 2px 20px rgba(0,0,0,.8)}
+.hero .lead b{color:var(--gold-2)}
+/* CTA dell'hero più grande degli altri bottoni: è la prima azione della pagina */
+.hero .hero-cta{font-size:19px;padding:13px 26px;line-height:1.2}
+
+/* contatore coupon sotto il titolo, prima della CTA dell'hero */
+.scarsita{display:flex;flex-direction:column;align-items:center;gap:14px;margin:0 auto 28px;max-width:420px}
+/* riga semplice senza box, come "Offerta valida solo online" nelle landing I Love Meat */
+.contatore{color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.85)}
+/* countdown: nel pannello dell'offerta, subito prima del bottone */
+.scadenza{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:24px}
+.countdown{display:flex;gap:10px;justify-content:center}
+.countdown div{min-width:62px;background:rgba(28,10,16,.6);border:1px solid var(--line);border-radius:10px;padding:8px 6px}
+.countdown b{display:block;font-family:"Anton",sans-serif;font-weight:400;font-size:24px;line-height:1;color:var(--text)}
+.countdown small{display:block;margin-top:4px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.countdown-label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+
+@media (max-width:600px){
+  .wrap{padding:0 20px}
+  .nav{position:sticky;background:rgba(28,10,16,.86);backdrop-filter:blur(10px);border-bottom-color:var(--line);padding:12px 18px}
+  .nav .logo img{height:40px}
+  .nav .btn{padding:10px 16px;font-size:15px}
+  .hero{min-height:auto;padding:36px 0 44px}
+  .hero-bg{height:80%;-webkit-mask-image:linear-gradient(180deg,#000 66%,transparent 100%);mask-image:linear-gradient(180deg,#000 66%,transparent 100%)}
+  .hero h1,.hero .riga-2x1{font-size:clamp(40px,12vw,62px)}
+  .hero h1 .l2{font-size:.6em}
+  .hero .riga-2x1 .l2{font-size:.84em;padding:.16em .55em .12em}
+  .hero .a-capo{display:inline}
+  .hero .lead{font-size:17px}
+  .hero .badge{font-size:10px;letter-spacing:.03em;padding:6px 11px}
+  .btn{font-size:15px;padding:12px 22px}
+  .hero .hero-cta{font-size:16px;padding:12px 20px}
+  .countdown div{min-width:56px}
+  .section{padding:30px 0}
+  .grid2{grid-template-columns:1fr}
+}
+
+/* ---- SEZIONI ---- */
+.section{padding:44px 0}
+.sec-head{text-align:center;margin-bottom:26px}
+.sec-head h2{font-size:clamp(30px,5.2vw,56px);margin-top:6px}
+.sec-head h2 .l2{color:var(--gold)}
+/* sezione dei primi su fondo oro: stacca dal form e dalle sezioni scure;
+   la card bordeaux dell'offerta ci sta sopra come un menu su tovaglia */
+.sec-oro{background:linear-gradient(180deg,var(--gold-2),var(--gold));padding:52px 0}
+.sec-oro .offerta-titolo{color:var(--ink-cta)}
+.sec-oro .offer{box-shadow:0 24px 60px rgba(60,20,10,.45)}
+.offerta-titolo{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(26px,3.3vw,40px);line-height:1.08;margin-bottom:22px;text-align:center}
+
+/* ---- OFFERTA: menu a sinistra, 2x1 a destra ---- */
+.offer{position:relative;display:grid;grid-template-columns:1.15fr .85fr;background:linear-gradient(160deg,#35121e,#1f0a11 72%);border:1px solid rgba(201,162,74,.3);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.offer::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% -10%,rgba(201,162,74,.12),transparent 60%)}
+.offer-menu{position:relative;z-index:1;padding:46px 44px}
+.offer-kicker{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+.offer-title-serif{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.9vw,34px);line-height:1.12;margin-bottom:26px}
+.offer-title-serif em{font-style:italic;color:var(--gold)}
+/* i quattro primi: card con foto quadrata e didascalia, 2x2 */
+.primi{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.primo{border-radius:14px;overflow:hidden;background:rgba(28,10,16,.55);border:1px solid rgba(201,162,74,.2)}
+.primo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.primo figcaption{padding:12px 14px 14px}
+.primo b{display:block;font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.15;color:#fbf3ea}
+.primo small{display:block;margin-top:4px;color:var(--muted);font-size:13px;line-height:1.45}
+.offer-prezzo{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:46px 34px;background:rgba(122,26,46,.28);border-left:1px solid rgba(201,162,74,.2)}
+.offer-prezzo .etichetta{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.offer-prezzo .price{font-family:"Anton",sans-serif;color:var(--gold);font-size:clamp(90px,12vw,140px);line-height:.95}
+.offer-prezzo .sub{font-family:var(--serif);font-style:italic;color:var(--text);font-size:21px;margin-top:6px;max-width:22ch}
+.offer-prezzo .rule{width:56px;height:1px;background:rgba(201,162,74,.5);margin:24px 0}
+.offer-prezzo .btn{width:100%;max-width:300px}
+.offer-prezzo .valida{margin-top:14px;color:var(--muted);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;line-height:1.6}
+@media (max-width:760px){
+  .offer{grid-template-columns:1fr}
+  .offer-menu{padding:32px 20px}
+  .primi{gap:12px}
+  .primo figcaption{padding:10px 11px 12px}
+  .primo b{font-size:18px}
+  .primo small{font-size:12px}
+  .offer-prezzo{padding:32px 24px;border-left:none;border-top:1px solid rgba(201,162,74,.2)}
+}
+
+/* ---- COME FUNZIONA ---- */
+.passi{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+/* card bianche come le recensioni delle landing I Love Meat: testo scuro, titolo bordeaux */
+.passo{background:#fff;color:#2a0c14;border-radius:var(--radius);padding:28px 24px;box-shadow:0 12px 34px rgba(0,0,0,.35)}
+.passo .n{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--bordeaux);color:var(--gold-2);font-family:"Anton",sans-serif;font-size:20px;margin-bottom:14px;border:1px solid rgba(201,162,74,.4)}
+.passo h3{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--bordeaux);margin-bottom:6px}
+.passo p{color:#5f4b4d;font-size:15.5px}
+.passo p b{color:var(--bordeaux);font-weight:700}
+@media (max-width:760px){.passi{grid-template-columns:1fr;gap:14px}}
+
+/* ---- ESPERIENZA ---- */
+/* racconto a sinistra, foto della tavola a destra; impilati su mobile */
+.racconto-wrap{display:grid;grid-template-columns:1fr .8fr;gap:40px;align-items:center}
+.racconto-foto{border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.racconto-foto img{width:100%;height:100%;object-fit:cover;max-height:460px}
+@media (max-width:760px){.racconto-wrap{grid-template-columns:1fr;gap:24px}.racconto-foto img{max-height:420px}}
+.exp .racconto-lead{font-family:var(--serif);font-style:italic;font-size:clamp(21px,2.6vw,28px);line-height:1.45;margin-bottom:18px}
+.exp .racconto p{color:var(--muted);font-size:17px;line-height:1.75;margin-bottom:14px}
+.exp .racconto p b{color:var(--text);font-weight:600}
+.cta-row{text-align:center;margin-top:30px}
+
+/* ---- COUPON (form) ---- */
+.book-sec{background:linear-gradient(180deg,#2a0c14,var(--bg))}
+.book-head .badge{margin-top:14px}
+.book-intro{max-width:46ch;margin:14px auto 0;color:#e9dcd4;font-size:17px;line-height:1.55}
+.book-intro b{color:var(--gold-2);font-weight:700}
+.book{--ink:#2a0c14;--ink-soft:#735a5c;--field:#f7f1ec;--bordo:#e2d4cc;
+  max-width:520px;margin:0 auto;background:#fff;border:1px solid #eadfd6;border-radius:20px;padding:22px;color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12.5px;color:var(--ink-soft);margin-bottom:5px;font-weight:600}
+.field .opt{font-weight:400}
+/* font-size 16px obbligatorio: sotto, iOS zooma la pagina al focus */
+.field input,.field select{width:100%;min-width:0;padding:11px 12px;background:var(--field);border:1px solid var(--bordo);border-radius:10px;color:var(--ink);font-size:16px;font-family:inherit}
+.field input::placeholder{color:#ad9f9a}
+.field input:focus,.field select:focus{outline:none;border-color:var(--bordeaux);background:#fff}
+.field option:disabled{color:#ad9f9a}
+.privacy{display:flex;align-items:flex-start;gap:10px;margin:2px 0 14px;color:var(--ink-soft);font-size:12.5px;line-height:1.4;cursor:pointer}
+.privacy input{flex:0 0 auto;width:18px;height:18px;margin-top:1px;accent-color:var(--bordeaux);cursor:pointer}
+.privacy a{color:var(--bordeaux);text-decoration:underline}
+.privacy.optional{margin-top:-8px;padding-top:12px;border-top:1px solid rgba(128,110,112,.3);opacity:.85}
+.cta{display:block;width:100%;padding:13px;border:none;border-radius:12px;background:var(--bordeaux);color:#fff;font-size:18px;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;font-family:"Anton","Arial Narrow",sans-serif;box-shadow:0 8px 22px rgba(122,26,46,.35)}
+.cta:hover{background:var(--bordeaux-2)}
+.cta:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.cta-nota{margin-top:8px;text-align:center;color:var(--ink-soft);font-size:12.5px}
+.err{color:var(--bordeaux);font-weight:600;font-size:13px;margin-top:8px;min-height:16px}
+
+/* ---- COUPON EMESSO: biglietto da mostrare al cameriere ---- */
+.success{text-align:center;padding:4px}
+.success h3{font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;font-size:26px;margin-bottom:6px}
+.success p{color:var(--ink-soft);font-size:15px}
+.ticket{position:relative;margin:18px 0 6px;border-radius:16px;background:linear-gradient(150deg,#7a1a2e,#3d0d18);color:#fff;padding:22px 20px;text-align:center;border:2px dashed rgba(224,191,107,.7)}
+.ticket .t-k{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2)}
+.ticket .t-big{font-family:"Anton",sans-serif;font-size:54px;line-height:1;color:var(--gold-2);margin:6px 0}
+.ticket .t-code{display:inline-block;margin-top:8px;padding:8px 16px;border-radius:8px;background:rgba(0,0,0,.28);font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:700;letter-spacing:.14em}
+.ticket .t-det{margin-top:12px;font-size:14px;line-height:1.7;color:#f3e3dc}
+.success .nota{margin-top:10px;font-size:13px}
+.success .again{display:inline-block;margin-top:10px;color:var(--bordeaux);font-size:14px}
+.chiusa{text-align:center;padding:18px 6px}
+.chiusa h3{font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;font-size:24px;margin-bottom:8px}
+.chiusa p{color:var(--ink-soft)}
+
+/* ---- TROVACI QUI ---- */
+.find-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.hours{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.hours .row{display:flex;justify-content:space-between;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line);font-size:15px}
+.hours .row:last-child{border-bottom:none}
+.hours .row span:first-child{color:var(--muted)}
+.hours .row.orari{display:block;line-height:1.5}
+.hours .row.orari b{color:var(--gold)}
+.hours .row.addr{background:var(--card);font-weight:600}
+.hours .row.addr a{color:var(--gold);text-decoration:none;text-align:right}
+.map{border:1px solid var(--line);border-radius:16px;overflow:hidden;min-height:300px;background:var(--bg2)}
+.map iframe{width:100%;min-height:300px;border:0;display:block;filter:grayscale(.3) contrast(1.05)}
+@media (max-width:760px){.find-grid{grid-template-columns:1fr}}
+
+/* ---- FOOTER ---- */
+.foot{border-top:1px solid var(--line);padding:26px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:13.5px}
+.foot .logo{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--text)}
+.foot a{color:var(--muted);text-decoration:none}
+.foot a:hover{color:var(--gold)}
+@media (max-width:600px){.foot{flex-direction:column;align-items:flex-start;gap:10px;padding:24px 20px}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="logo" href="#" aria-label="Romano Vino e Cucina"><img src="logo.png" alt="Romano Vino e Cucina" width="236" height="114"></a>
+  <a class="btn" href="#coupon">Prenota un tavolo</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <img class="hero-bg" src="hero.jpg" alt="Tre primi romani serviti da Romano Vino e Cucina: amatriciana, cacio e pepe e spaghetti al guanciale" onerror="this.style.display='none'">
+  <div class="wrap hero-inner">
+    <span class="badge"><span class="dot"></span>Offerta esclusiva · fino a fine ottobre</span>
+    <h1 class="display">Voi magnà romano?<br><span class="l2">Allora siedite e famo le cose serie.</span></h1>
+    <p class="lead">Vieni a provà i veri primi romani:</p>
+    <p class="display riga-2x1"><span class="l2">Prendi <em>2</em> primi,<br class="a-capo"> ne paghi <em>1</em>.</span></p>
+
+    <div class="scarsita">
+      <p class="contatore"><span class="js-rimasti">25</span> coupon disponibili</p>
+    </div>
+
+    <a class="btn hero-cta" href="#coupon">Prenota un tavolo e prendi l'offerta</a>
+  </div>
+</header>
+
+<!-- COUPON -->
+<section class="section book-sec">
+  <div class="wrap">
+    <div class="sec-head book-head">
+      <h2 class="display">Prenota il tuo tavolo<br><span class="l2">e riserva il tuo coupon</span></h2>
+      <p class="book-intro">Il coupon è valido <b>solo nella data inserita nella tua prenotazione</b>: compilando il form riservi un tavolo a tuo nome.</p>
+      <span class="badge"><span class="dot"></span>Pochi coupon rimasti</span>
+    </div>
+
+    <div class="book" id="coupon" aria-label="Richiedi il coupon 2x1">
+      <div class="field">
+        <label for="data">1 · Giorno</label>
+        <select id="data" required></select>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="orario">2 · Orario</label>
+          <select id="orario" required></select>
+        </div>
+        <div class="field">
+          <label for="persone">3 · Persone</label>
+          <select id="persone" required></select>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="nome">4 · Il tuo nome</label>
+          <input type="text" id="nome" autocomplete="name" placeholder="Nome e cognome" required>
+        </div>
+        <div class="field">
+          <label for="telefono">Telefono</label>
+          <input type="tel" id="telefono" autocomplete="tel" placeholder="Es. 340 123 4567" required>
+        </div>
+      </div>
+      <label class="privacy" for="privacy">
+        <input type="checkbox" id="privacy">
+        <span>Ho letto e accetto l'<a href="privacy.html" target="_blank">Informativa sulla Privacy</a>.</span>
+      </label>
+      <!-- Consenso marketing FACOLTATIVO: non entra nella validazione -->
+      <label class="privacy optional" for="marketing">
+        <input type="checkbox" id="marketing">
+        <span>Acconsento a ricevere offerte e comunicazioni commerciali del ristorante tramite i recapiti forniti, come indicato nell'<a href="privacy.html" target="_blank">Informativa Privacy</a>. Il consenso è facoltativo e revocabile in qualsiasi momento.</span>
+      </label>
+      <button class="cta" id="cta" disabled>Prenota un tavolo</button>
+      <p class="cta-nota">Il coupon è valido nella data inserita nel form.</p>
+      <div class="err" id="err"></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERTA -->
+<section class="section sec-oro" id="offerta">
+  <div class="wrap">
+    <h2 class="offerta-titolo">Scegli i tuoi primi preferiti</h2>
+    <div class="offer">
+      <div class="offer-menu">
+        <p class="offer-kicker">Scegli i tuoi due primi</p>
+        <h3 class="offer-title-serif">Quattro classici, <em>come si fanno a Roma</em></h3>
+        <div class="primi">
+          <figure class="primo"><img src="primo-carbonara.jpg" alt="Spaghetti alla carbonara con guanciale e pecorino" loading="lazy"><figcaption><b>Carbonara</b><small>Guanciale croccante, tuorlo, pecorino romano e pepe</small></figcaption></figure>
+          <figure class="primo"><img src="primo-cacio-e-pepe.jpg" alt="Spaghetti cacio e pepe" loading="lazy"><figcaption><b>Cacio e pepe</b><small>Pecorino romano e pepe nero macinato al momento</small></figcaption></figure>
+          <figure class="primo"><img src="primo-amatriciana.jpg" alt="Rigatoni all'amatriciana con guanciale" loading="lazy"><figcaption><b>Amatriciana</b><small>Guanciale, pomodoro e pecorino</small></figcaption></figure>
+          <figure class="primo"><img src="primo-gricia.jpg" alt="Spaghetti alla gricia con guanciale e pecorino" loading="lazy"><figcaption><b>Gricia</b><small>Guanciale, pecorino romano e pepe</small></figcaption></figure>
+        </div>
+      </div>
+      <aside class="offer-prezzo">
+        <span class="etichetta">Riserva il tuo coupon per il primo in omaggio</span>
+        <span class="price">2x1</span>
+        <span class="sub">Ne ordini due, il secondo è offerto da noi</span>
+        <div class="rule"></div>
+        <div class="scadenza">
+          <span class="countdown-label">L'offerta scade tra</span>
+          <div class="countdown" aria-live="off">
+            <div><b id="cd-g">--</b><small>giorni</small></div>
+            <div><b id="cd-h">--</b><small>ore</small></div>
+            <div><b id="cd-m">--</b><small>min</small></div>
+            <div><b id="cd-s">--</b><small>sec</small></div>
+          </div>
+        </div>
+        <a class="btn" href="#coupon">Prenota un tavolo</a>
+        <p class="valida">Solo <span class="js-totali">25</span> coupon · valido fino al 31 ottobre</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Come funziona</span>
+      <h2 class="display">Tre passi, <span class="l2">un primo gratis</span></h2>
+    </div>
+    <div class="passi">
+      <div class="passo"><span class="n">1</span><h3>Riservi un tavolo nel form</h3><p>Scegli giorno, orario e quante persone, lascia nome e telefono: il coupon è tuo. <b>Vale solo nel giorno che hai prenotato.</b></p></div>
+      <div class="passo"><span class="n">2</span><h3>Ordina i tuoi primi romani</h3><p>Scegli due primi tra carbonara, cacio e pepe, amatriciana e gricia.</p></div>
+      <div class="passo"><span class="n">3</span><h3>Vai in cassa, ne paghi uno</h3><p>Mostra il coupon al momento del conto: il secondo primo te lo offriamo noi.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPERIENZA -->
+<section class="section exp">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Romano Vino e Cucina</span>
+      <h2 class="display">Roma, <span class="l2">a tavola</span></h2>
+    </div>
+    <div class="racconto-wrap">
+    <div class="racconto">
+      <p class="racconto-lead">A due passi da San Giovanni, una cucina che parla romano: i primi della tradizione, una cantina curata e il tempo giusto per goderseli.</p>
+      <p>Da <b>Romano Vino e Cucina</b> trovi i piatti che hanno fatto la storia della cucina di Roma, accompagnati da una <b>selezione di vini, bollicine e champagne</b>, taglieri di salumi e formaggi.</p>
+      <p>Con questa offerta porti qualcuno a tavola e il secondo primo lo offriamo noi. Pranzo o cena, scegli tu.</p>
+    </div>
+    <figure class="racconto-foto"><img src="tavola-vino.jpg" alt="Rigatoni e calici di vino rosso a lume di candela da Romano Vino e Cucina" loading="lazy"></figure>
+    </div>
+    <div class="cta-row"><a class="btn" href="#coupon">Prenota un tavolo</a></div>
+  </div>
+</section>
+
+<!-- TROVACI QUI -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Dove e quando</span>
+      <h2 class="display">Trovaci qui</h2>
+    </div>
+    <div class="find-grid">
+      <div class="hours">
+        <div class="row orari">Aperti <b>tutti i giorni</b> dalle <b>12:00 alle 16:00</b> e dalle <b>18:00 alle 24:00</b>.</div>
+        <div class="row addr"><span>Indirizzo</span><a href="https://www.google.com/maps/search/?api=1&query=Romano+Vino+e+Cucina+Via+Taranto+8+Roma" target="_blank" rel="noopener">Via Taranto 8/10/12, Roma</a></div>
+        <div class="row addr"><span>Telefono</span><a href="tel:+393402154732">+39 340 215 4732</a></div>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps?q=Romano%20Vino%20e%20Cucina%20Via%20Taranto%208%20Roma&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa Romano Vino e Cucina"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="wrap foot">
+  <div class="logo">Romano Vino e Cucina</div>
+  <div>
+    <a href="https://www.google.com/maps/search/?api=1&query=Romano+Vino+e+Cucina+Via+Taranto+8+Roma" target="_blank" rel="noopener">Via Taranto 8/10/12, 00182 Roma</a>
+    · <a href="tel:+393402154732">+39 340 215 4732</a>
+    · <a href="privacy.html">Privacy</a>
+  </div>
+</footer>
+
+<script>
+/* Barra in alto: trasparente sull'hero, scura appena si scorre */
+(function () {
+  var nav = document.querySelector(".nav");
+  function aggiorna(){ nav.classList.toggle("scrolled", window.scrollY > 40); }
+  aggiorna();
+  window.addEventListener("scroll", aggiorna, {passive:true});
+})();
+
+/* ====== CONFIG: cambia SOLO questo blocco ====== */
+window.LP_CONFIG = {
+  phone: "+393402154732",
+  // URL "/exec" dell'Apps Script che scrive nel foglio. Vuoto = nessun invio,
+  // il coupon viene mostrato comunque (da collegare prima di andare online).
+  sheetUrl: "",
+  offerTag: "Primi romani 2x1",
+  couponTotali: 25,
+  // Coupon ancora disponibili: si aggiorna A MANO man mano che vengono richiesti.
+  // A 0 il form si chiude da solo.
+  couponRimasti: 25,
+  // Ultimo giorno valido (incluso): dopo questa data il form si chiude.
+  scadenza: "2026-10-31",
+  // Aperti tutti i giorni 12:00–16:00 e 18:00–24:00: ultimo tavolo mezz'ora prima della chiusura
+  lunch: ["12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30"],
+  dinner: ["18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00","22:30","23:00","23:30"]
+};
+
+(function () {
+  var C = window.LP_CONFIG;
+  var $ = function (id) { return document.getElementById(id); };
+  var p = C.scadenza.split("-");
+  var FINE = new Date(+p[0], +p[1]-1, +p[2], 23, 59, 59);   // fine giornata, ora locale
+
+  /* --- contatore coupon --- */
+  var rimasti = Math.max(0, Math.min(C.couponRimasti, C.couponTotali));
+  document.querySelectorAll(".js-rimasti").forEach(function(e){ e.textContent = rimasti; });
+  document.querySelectorAll(".js-totali").forEach(function(e){ e.textContent = C.couponTotali; });
+
+  /* --- countdown alla scadenza --- */
+  function due(n){ return (n < 10 ? "0" : "") + n; }
+  function tick(){
+    var ms = Math.max(0, FINE - new Date());
+    var s = Math.floor(ms / 1000);
+    $("cd-g").textContent = Math.floor(s / 86400);
+    $("cd-h").textContent = due(Math.floor(s % 86400 / 3600));
+    $("cd-m").textContent = due(Math.floor(s % 3600 / 60));
+    $("cd-s").textContent = due(s % 60);
+  }
+  tick(); setInterval(tick, 1000);
+
+  var bookEl = $("coupon");
+
+  /* --- offerta finita (scaduta o coupon esauriti): il form sparisce --- */
+  if (new Date() > FINE || rimasti <= 0) {
+    bookEl.innerHTML = '<div class="chiusa"><h3>' + (rimasti <= 0 ? "Coupon esauriti" : "Offerta terminata") +
+      '</h3><p>Grazie a tutti! Per prenotare un tavolo chiamaci al <a href="tel:' + C.phone + '">' + C.phone.replace("+39", "+39 ") + '</a>.</p></div>';
+    return;
+  }
+
+  var dateEl=$("data"), slotEl=$("orario"), peopleEl=$("persone"), nameEl=$("nome"),
+      phoneEl=$("telefono"), privacyEl=$("privacy"), marketingEl=$("marketing"), ctaEl=$("cta"), errEl=$("err");
+  var SLOTS = C.lunch.concat(C.dinner);
+  var GIORNI = ["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"];
+  var MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+  // Data locale YYYY-MM-DD: toISOString() userebbe UTC e tornerebbe il giorno prima
+  var iso = function(d){ var m=d.getMonth()+1, g=d.getDate(); return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(g<10?"0":"")+g; };
+  var dataDa = function(s){ var q=s.split("-"); return new Date(+q[0], +q[1]-1, +q[2]); };
+
+  for (var n=1; n<=10; n++) { var o=document.createElement("option"); o.value=n; o.textContent=n+(n===1?" persona":" persone"); peopleEl.appendChild(o); }
+  peopleEl.value = "2";
+
+  function passato(date, slot){
+    if (date !== iso(new Date())) return false;
+    var hm = slot.split(":"), now = new Date();
+    return (+hm[0]*60 + +hm[1]) <= (now.getHours()*60 + now.getMinutes());
+  }
+
+  // Giorni prenotabili: da oggi alla scadenza, saltando oggi se gli orari sono finiti
+  (function(){
+    var ph=document.createElement("option"); ph.value=""; ph.textContent="Scegli il giorno"; dateEl.appendChild(ph);
+    var d=new Date(); d.setHours(0,0,0,0);
+    while (d <= FINE) {
+      var s=iso(d);
+      if (SLOTS.some(function(x){ return !passato(s, x); })) {
+        var o=document.createElement("option"); o.value=s;
+        o.textContent=GIORNI[d.getDay()]+" "+d.getDate()+" "+MESI[d.getMonth()];
+        dateEl.appendChild(o);
+      }
+      d.setDate(d.getDate()+1);
+    }
+  })();
+
+  function renderSlots(){
+    var date=dateEl.value;
+    slotEl.innerHTML="";
+    var v=document.createElement("option"); v.value="";
+    v.textContent = date ? "Scegli" : "Prima il giorno";
+    slotEl.appendChild(v);
+    if (date) {
+      [["Pranzo", C.lunch], ["Cena", C.dinner]].forEach(function(gr){
+        var og=document.createElement("optgroup"); og.label=gr[0];
+        gr[1].forEach(function(slot){
+          var o=document.createElement("option"), off=passato(date, slot);
+          o.value=off?"":slot; o.textContent=off?slot+" — passato":slot; o.disabled=off;
+          og.appendChild(o);
+        });
+        slotEl.appendChild(og);
+      });
+    }
+    validate();
+  }
+
+  function validate(){
+    var ok = dateEl.value && slotEl.value && peopleEl.value && nameEl.value.trim().length>=2 && phoneEl.value.trim().length>=6 && privacyEl.checked;
+    ctaEl.disabled = !ok; return ok;
+  }
+
+  // Codice leggibile al telefono: niente 0/O e 1/I che si confondono
+  function codice(){
+    var a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", c="";
+    for (var i=0; i<5; i++) c += a[Math.floor(Math.random()*a.length)];
+    return "ROMA-" + c;
+  }
+
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  function showSuccess(d){
+    var dt=dataDa(d.date);
+    bookEl.innerHTML =
+      '<div class="success">' +
+        '<h3>Ecco il tuo coupon, ' + esc(d.nome.split(" ")[0]) + '!</h3>' +
+        '<p>Fai uno screenshot e mostralo in cassa al momento del conto.</p>' +
+        '<div class="ticket">' +
+          '<div class="t-k">Romano Vino e Cucina</div>' +
+          '<div class="t-big">2x1</div>' +
+          '<div class="t-k">sui primi romani</div>' +
+          '<div class="t-code">' + d.codice + '</div>' +
+          '<div class="t-det">' + GIORNI[dt.getDay()] + ' ' + dt.getDate() + ' ' + MESI[dt.getMonth()] + ' · ore ' + d.slot + ' · ' + d.persone + (d.persone==="1"?" persona":" persone") + '<br>A nome di ' + esc(d.nome) + '</div>' +
+        '</div>' +
+        '<p class="nota"><b>Valido solo il giorno della prenotazione</b></p>' +
+        '<a class="again" href="tel:' + C.phone + '">Devi spostare l\'orario? Chiamaci</a>' +
+      '</div>';
+    bookEl.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+
+  function submit(){
+    if (!validate()) { errEl.textContent="Compila i campi obbligatori e accetta la privacy."; return; }
+    errEl.textContent="";
+    var d = { date:dateEl.value, slot:slotEl.value, persone:peopleEl.value, nome:nameEl.value.trim(), tel:phoneEl.value.trim(), codice:codice() };
+    if (!C.sheetUrl) { showSuccess(d); return; }
+
+    ctaEl.disabled=true; ctaEl.textContent="Invio in corso…";
+    var body = new URLSearchParams({
+      data:d.date, ora:d.slot, persone:d.persone, nome:d.nome, telefono:d.tel,
+      richieste:"Coupon " + d.codice, privacy:"Sì", marketing:(marketingEl.checked?"Sì":"No"),
+      offerta:C.offerTag, coupon:d.codice
+    });
+    fetch(C.sheetUrl, {method:"POST", mode:"no-cors", body:body})
+      .then(function(){ showSuccess(d); })
+      .catch(function(){
+        ctaEl.disabled=false; ctaEl.textContent="Prenota un tavolo";
+        errEl.textContent="Connessione assente. Chiamaci per bloccare l'offerta: " + C.phone;
+      });
+  }
+
+  dateEl.addEventListener("change", renderSlots);
+  [slotEl, peopleEl, privacyEl].forEach(function(e){ e.addEventListener("change", validate); });
+  [nameEl, phoneEl].forEach(function(e){ e.addEventListener("input", validate); });
+  ctaEl.addEventListener("click", submit);
+  renderSlots();
+})();
+</script>
+</body>
+</html>
