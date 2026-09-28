@@ -71,6 +71,22 @@ a{color:inherit}
   background:linear-gradient(180deg,var(--gold-2),var(--gold));padding:.16em .5em .12em;border-radius:.16em;
   text-shadow:none;box-shadow:0 0 0 3px rgba(224,191,107,.28),0 14px 40px rgba(0,0,0,.6);transform:rotate(-1.5deg)}
 .hero .riga-2x1 .l2 em{font-style:normal;color:var(--bordeaux)}
+/* bollino a stella bordeaux sull'angolo in alto a destra della targa: sticker
+   cliccabile che porta al form. Misure in px: la targa usa gli em del titolo. */
+/* spazio a destra nella targa: il bollino sta sull'angolo senza coprire il testo */
+.hero .riga-2x1 .l2{position:relative;padding-right:1.35em}
+.bollino{position:absolute;top:-50px;right:-72px;width:104px;height:104px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:"Anton","Arial Narrow",sans-serif;font-size:17px;font-weight:400;line-height:1;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;
+  color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35);filter:drop-shadow(0 6px 10px rgba(0,0,0,.55));
+  animation:bollino 1.6s ease-in-out infinite}
+/* sticker a stella: forma dentellata piena, bordeaux acceso, che pulsa */
+.bollino::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(160deg,#c0304f,var(--bordeaux) 75%);
+  clip-path:polygon(50.0% 0.0%,56.4% 9.5%,65.5% 2.4%,68.6% 13.5%,79.4% 9.5%,79.0% 21.0%,90.5% 20.6%,86.5% 31.4%,97.6% 34.5%,90.5% 43.6%,100.0% 50.0%,90.5% 56.4%,97.6% 65.5%,86.5% 68.6%,90.5% 79.4%,79.0% 79.0%,79.4% 90.5%,68.6% 86.5%,65.5% 97.6%,56.4% 90.5%,50.0% 100.0%,43.6% 90.5%,34.5% 97.6%,31.4% 86.5%,20.6% 90.5%,21.0% 79.0%,9.5% 79.4%,13.5% 68.6%,2.4% 65.5%,9.5% 56.4%,0.0% 50.0%,9.5% 43.6%,2.4% 34.5%,13.5% 31.4%,9.5% 20.6%,21.0% 21.0%,20.6% 9.5%,31.4% 13.5%,34.5% 2.4%,43.6% 9.5%)}
+.bollino span{position:relative;transform:rotate(-12deg)}
+@keyframes bollino{0%,100%{transform:rotate(12deg) scale(1)}50%{transform:rotate(12deg) scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.bollino{animation:none;transform:rotate(12deg)}}
+.bollino:hover{animation-play-state:paused}
 /* a capo solo su mobile: così l'"1." non resta da solo sulla seconda riga */
 .hero .a-capo{display:none}
 .hero .lead{color:#f7ece4;font-size:19px;max-width:40ch;margin:20px auto 0;text-shadow:0 1px 6px rgba(0,0,0,.9),0 2px 20px rgba(0,0,0,.8)}
@@ -101,6 +117,11 @@ a{color:inherit}
   .hero h1 .l2{font-size:.6em}
   .hero .riga-2x1 .l2{font-size:.84em;padding:.16em .55em .12em}
   .hero .a-capo{display:inline}
+  /* su mobile la targa è piena larghezza: il bollino sale sopra l'angolo e la
+     targa scende un po' per fargli spazio */
+  .hero .riga-2x1{margin-top:58px}
+  .hero .riga-2x1 .l2{padding-right:.55em}
+  .bollino{width:76px;height:76px;top:-62px;right:-26px;font-size:12.5px}
   .hero .lead{font-size:17px}
   .hero .badge{font-size:10px;letter-spacing:.03em;padding:6px 11px}
   .btn{font-size:15px;padding:12px 22px}
@@ -252,7 +273,7 @@ a{color:inherit}
     <span class="badge"><span class="dot"></span>Offerta esclusiva · fino a fine ottobre</span>
     <h1 class="display">Voi magnà romano?<br><span class="l2">Allora siedite e famo le cose serie.</span></h1>
     <p class="lead">Vieni a provà i veri primi romani:</p>
-    <p class="display riga-2x1"><span class="l2">Prendi <em>2</em> primi,<br class="a-capo"> ne paghi <em>1</em>.</span></p>
+    <p class="display riga-2x1"><span class="l2">Prendi <em>2</em> primi,<br class="a-capo"> ne paghi <em>1</em>.<a class="bollino" href="#coupon"><span>Riserva<br>il coupon!</span></a></span></p>
 
     <div class="scarsita">
       <p class="contatore"><span class="js-rimasti">25</span> coupon disponibili</p>
