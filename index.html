@@ -128,7 +128,6 @@ a{color:inherit}
   .hero .hero-cta{font-size:16px;padding:12px 20px}
   .countdown div{min-width:56px}
   .section{padding:30px 0}
-  .grid2{grid-template-columns:1fr}
 }
 
 /* ---- SEZIONI ---- */
@@ -195,43 +194,17 @@ a{color:inherit}
 .exp .racconto p b{color:var(--text);font-weight:600}
 .cta-row{text-align:center;margin-top:30px}
 
-/* ---- COUPON (form) ---- */
+/* ---- PRENOTAZIONE (widget Dinevo in iframe) ---- */
 .book-sec{background:linear-gradient(180deg,#2a0c14,var(--bg))}
 .book-head .badge{margin-top:14px}
 .book-intro{max-width:46ch;margin:14px auto 0;color:#e9dcd4;font-size:17px;line-height:1.55}
 .book-intro b{color:var(--gold-2);font-weight:700}
-.book{--ink:#2a0c14;--ink-soft:#735a5c;--field:#f7f1ec;--bordo:#e2d4cc;
+.book-embed{max-width:560px;margin:0 auto}
+.book-embed iframe{display:block;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.cta-nota{margin-top:12px;text-align:center;color:#cdb9b3;font-size:12.5px}
+/* card bianca mostrata al posto del widget quando l'offerta è finita */
+.book{--ink:#2a0c14;--ink-soft:#735a5c;
   max-width:520px;margin:0 auto;background:#fff;border:1px solid #eadfd6;border-radius:20px;padding:22px;color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{margin-bottom:12px}
-.field label{display:block;font-size:12.5px;color:var(--ink-soft);margin-bottom:5px;font-weight:600}
-.field .opt{font-weight:400}
-/* font-size 16px obbligatorio: sotto, iOS zooma la pagina al focus */
-.field input,.field select{width:100%;min-width:0;padding:11px 12px;background:var(--field);border:1px solid var(--bordo);border-radius:10px;color:var(--ink);font-size:16px;font-family:inherit}
-.field input::placeholder{color:#ad9f9a}
-.field input:focus,.field select:focus{outline:none;border-color:var(--bordeaux);background:#fff}
-.field option:disabled{color:#ad9f9a}
-.privacy{display:flex;align-items:flex-start;gap:10px;margin:2px 0 14px;color:var(--ink-soft);font-size:12.5px;line-height:1.4;cursor:pointer}
-.privacy input{flex:0 0 auto;width:18px;height:18px;margin-top:1px;accent-color:var(--bordeaux);cursor:pointer}
-.privacy a{color:var(--bordeaux);text-decoration:underline}
-.privacy.optional{margin-top:-8px;padding-top:12px;border-top:1px solid rgba(128,110,112,.3);opacity:.85}
-.cta{display:block;width:100%;padding:13px;border:none;border-radius:12px;background:var(--bordeaux);color:#fff;font-size:18px;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;font-family:"Anton","Arial Narrow",sans-serif;box-shadow:0 8px 22px rgba(122,26,46,.35)}
-.cta:hover{background:var(--bordeaux-2)}
-.cta:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
-.cta-nota{margin-top:8px;text-align:center;color:var(--ink-soft);font-size:12.5px}
-.err{color:var(--bordeaux);font-weight:600;font-size:13px;margin-top:8px;min-height:16px}
-
-/* ---- COUPON EMESSO: biglietto da mostrare al cameriere ---- */
-.success{text-align:center;padding:4px}
-.success h3{font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;font-size:26px;margin-bottom:6px}
-.success p{color:var(--ink-soft);font-size:15px}
-.ticket{position:relative;margin:18px 0 6px;border-radius:16px;background:linear-gradient(150deg,#7a1a2e,#3d0d18);color:#fff;padding:22px 20px;text-align:center;border:2px dashed rgba(224,191,107,.7)}
-.ticket .t-k{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2)}
-.ticket .t-big{font-family:"Anton",sans-serif;font-size:54px;line-height:1;color:var(--gold-2);margin:6px 0}
-.ticket .t-code{display:inline-block;margin-top:8px;padding:8px 16px;border-radius:8px;background:rgba(0,0,0,.28);font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:700;letter-spacing:.14em}
-.ticket .t-det{margin-top:12px;font-size:14px;line-height:1.7;color:#f3e3dc}
-.success .nota{margin-top:10px;font-size:13px}
-.success .again{display:inline-block;margin-top:10px;color:var(--bordeaux);font-size:14px}
 .chiusa{text-align:center;padding:18px 6px}
 .chiusa h3{font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;font-size:24px;margin-bottom:8px}
 .chiusa p{color:var(--ink-soft)}
@@ -292,43 +265,34 @@ a{color:inherit}
       <span class="badge"><span class="dot"></span>Pochi coupon rimasti</span>
     </div>
 
-    <div class="book" id="coupon" aria-label="Richiedi il coupon 2x1">
-      <div class="field">
-        <label for="data">1 · Giorno</label>
-        <select id="data" required></select>
-      </div>
-      <div class="grid2">
-        <div class="field">
-          <label for="orario">2 · Orario</label>
-          <select id="orario" required></select>
-        </div>
-        <div class="field">
-          <label for="persone">3 · Persone</label>
-          <select id="persone" required></select>
-        </div>
-      </div>
-      <div class="grid2">
-        <div class="field">
-          <label for="nome">4 · Il tuo nome</label>
-          <input type="text" id="nome" autocomplete="name" placeholder="Nome e cognome" required>
-        </div>
-        <div class="field">
-          <label for="telefono">Telefono</label>
-          <input type="tel" id="telefono" autocomplete="tel" placeholder="Es. 340 123 4567" required>
-        </div>
-      </div>
-      <label class="privacy" for="privacy">
-        <input type="checkbox" id="privacy">
-        <span>Ho letto e accetto l'<a href="privacy.html" target="_blank">Informativa sulla Privacy</a>.</span>
-      </label>
-      <!-- Consenso marketing FACOLTATIVO: non entra nella validazione -->
-      <label class="privacy optional" for="marketing">
-        <input type="checkbox" id="marketing">
-        <span>Acconsento a ricevere offerte e comunicazioni commerciali del ristorante tramite i recapiti forniti, come indicato nell'<a href="privacy.html" target="_blank">Informativa Privacy</a>. Il consenso è facoltativo e revocabile in qualsiasi momento.</span>
-      </label>
-      <button class="cta" id="cta" disabled>Prenota un tavolo</button>
+    <!-- Prenotazioni: widget Dinevo con la promozione "Primi romani 2x1" -->
+    <div class="book-embed" id="coupon">
+      <iframe
+        id="dinevo-booking"
+        src="https://api.dinevo.it/embed/r/est_0cb98578-b4b6-463b-bad3-2b3c8f035711?promotion=promo_68e65ba4-290c-440c-8a81-c98c47ec65da"
+        title="Prenota un tavolo"
+        height="900"
+        style="width: 100%; border: 0; border-radius: 22px; overflow: hidden"
+      ></iframe>
+      <script>
+        window.addEventListener('message', function (event) {
+          if (!event.data || event.data.type !== 'dinevo:booking-height') return;
+          var frame = document.getElementById('dinevo-booking');
+          if (!frame) return;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!reduce) frame.style.transition = 'height 0.2s ease';
+          frame.style.height = event.data.height + 'px';
+        });
+        if (typeof window.fbq === 'function') {
+          window.addEventListener('message', function (event) {
+            if (!event.data || event.data.type !== 'dinevo:booking-confirmed') return;
+            var frame = document.getElementById('dinevo-booking');
+            if (!frame || event.source !== frame.contentWindow) return;
+            window.fbq('track', 'Purchase', { value: 0, currency: 'EUR' });
+          });
+        }
+      </script>
       <p class="cta-nota">Il coupon è valido nella data inserita nel form.</p>
-      <div class="err" id="err"></div>
     </div>
   </div>
 </section>
@@ -445,19 +409,12 @@ a{color:inherit}
 /* ====== CONFIG: cambia SOLO questo blocco ====== */
 window.LP_CONFIG = {
   phone: "+393402154732",
-  // URL "/exec" dell'Apps Script che scrive nel foglio. Vuoto = nessun invio,
-  // il coupon viene mostrato comunque (da collegare prima di andare online).
-  sheetUrl: "",
-  offerTag: "Primi romani 2x1",
   couponTotali: 25,
   // Coupon ancora disponibili: si aggiorna A MANO man mano che vengono richiesti.
-  // A 0 il form si chiude da solo.
+  // A 0 il widget di prenotazione si chiude da solo.
   couponRimasti: 25,
-  // Ultimo giorno valido (incluso): dopo questa data il form si chiude.
-  scadenza: "2026-10-31",
-  // Aperti tutti i giorni 12:00–16:00 e 18:00–24:00: ultimo tavolo mezz'ora prima della chiusura
-  lunch: ["12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30"],
-  dinner: ["18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00","22:30","23:00","23:30"]
+  // Ultimo giorno valido (incluso): dopo questa data il widget si chiude.
+  scadenza: "2026-10-31"
 };
 
 (function () {
@@ -485,124 +442,13 @@ window.LP_CONFIG = {
 
   var bookEl = $("coupon");
 
-  /* --- offerta finita (scaduta o coupon esauriti): il form sparisce --- */
+  /* --- offerta finita (scaduta o coupon esauriti): il widget di prenotazione sparisce --- */
   if (new Date() > FINE || rimasti <= 0) {
-    bookEl.innerHTML = '<div class="chiusa"><h3>' + (rimasti <= 0 ? "Coupon esauriti" : "Offerta terminata") +
-      '</h3><p>Grazie a tutti! Per prenotare un tavolo chiamaci al <a href="tel:' + C.phone + '">' + C.phone.replace("+39", "+39 ") + '</a>.</p></div>';
+    bookEl.innerHTML = '<div class="book"><div class="chiusa"><h3>' + (rimasti <= 0 ? "Coupon esauriti" : "Offerta terminata") +
+      '</h3><p>Grazie a tutti! Per prenotare un tavolo chiamaci al <a href="tel:' + C.phone + '">' + C.phone.replace("+39", "+39 ") + '</a>.</p></div></div>';
     return;
   }
 
-  var dateEl=$("data"), slotEl=$("orario"), peopleEl=$("persone"), nameEl=$("nome"),
-      phoneEl=$("telefono"), privacyEl=$("privacy"), marketingEl=$("marketing"), ctaEl=$("cta"), errEl=$("err");
-  var SLOTS = C.lunch.concat(C.dinner);
-  var GIORNI = ["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"];
-  var MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-  // Data locale YYYY-MM-DD: toISOString() userebbe UTC e tornerebbe il giorno prima
-  var iso = function(d){ var m=d.getMonth()+1, g=d.getDate(); return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(g<10?"0":"")+g; };
-  var dataDa = function(s){ var q=s.split("-"); return new Date(+q[0], +q[1]-1, +q[2]); };
-
-  for (var n=1; n<=10; n++) { var o=document.createElement("option"); o.value=n; o.textContent=n+(n===1?" persona":" persone"); peopleEl.appendChild(o); }
-  peopleEl.value = "2";
-
-  function passato(date, slot){
-    if (date !== iso(new Date())) return false;
-    var hm = slot.split(":"), now = new Date();
-    return (+hm[0]*60 + +hm[1]) <= (now.getHours()*60 + now.getMinutes());
-  }
-
-  // Giorni prenotabili: da oggi alla scadenza, saltando oggi se gli orari sono finiti
-  (function(){
-    var ph=document.createElement("option"); ph.value=""; ph.textContent="Scegli il giorno"; dateEl.appendChild(ph);
-    var d=new Date(); d.setHours(0,0,0,0);
-    while (d <= FINE) {
-      var s=iso(d);
-      if (SLOTS.some(function(x){ return !passato(s, x); })) {
-        var o=document.createElement("option"); o.value=s;
-        o.textContent=GIORNI[d.getDay()]+" "+d.getDate()+" "+MESI[d.getMonth()];
-        dateEl.appendChild(o);
-      }
-      d.setDate(d.getDate()+1);
-    }
-  })();
-
-  function renderSlots(){
-    var date=dateEl.value;
-    slotEl.innerHTML="";
-    var v=document.createElement("option"); v.value="";
-    v.textContent = date ? "Scegli" : "Prima il giorno";
-    slotEl.appendChild(v);
-    if (date) {
-      [["Pranzo", C.lunch], ["Cena", C.dinner]].forEach(function(gr){
-        var og=document.createElement("optgroup"); og.label=gr[0];
-        gr[1].forEach(function(slot){
-          var o=document.createElement("option"), off=passato(date, slot);
-          o.value=off?"":slot; o.textContent=off?slot+" — passato":slot; o.disabled=off;
-          og.appendChild(o);
-        });
-        slotEl.appendChild(og);
-      });
-    }
-    validate();
-  }
-
-  function validate(){
-    var ok = dateEl.value && slotEl.value && peopleEl.value && nameEl.value.trim().length>=2 && phoneEl.value.trim().length>=6 && privacyEl.checked;
-    ctaEl.disabled = !ok; return ok;
-  }
-
-  // Codice leggibile al telefono: niente 0/O e 1/I che si confondono
-  function codice(){
-    var a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", c="";
-    for (var i=0; i<5; i++) c += a[Math.floor(Math.random()*a.length)];
-    return "ROMA-" + c;
-  }
-
-  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
-
-  function showSuccess(d){
-    var dt=dataDa(d.date);
-    bookEl.innerHTML =
-      '<div class="success">' +
-        '<h3>Ecco il tuo coupon, ' + esc(d.nome.split(" ")[0]) + '!</h3>' +
-        '<p>Fai uno screenshot e mostralo in cassa al momento del conto.</p>' +
-        '<div class="ticket">' +
-          '<div class="t-k">Romano Vino e Cucina</div>' +
-          '<div class="t-big">2x1</div>' +
-          '<div class="t-k">sui primi romani</div>' +
-          '<div class="t-code">' + d.codice + '</div>' +
-          '<div class="t-det">' + GIORNI[dt.getDay()] + ' ' + dt.getDate() + ' ' + MESI[dt.getMonth()] + ' · ore ' + d.slot + ' · ' + d.persone + (d.persone==="1"?" persona":" persone") + '<br>A nome di ' + esc(d.nome) + '</div>' +
-        '</div>' +
-        '<p class="nota"><b>Valido solo il giorno della prenotazione</b></p>' +
-        '<a class="again" href="tel:' + C.phone + '">Devi spostare l\'orario? Chiamaci</a>' +
-      '</div>';
-    bookEl.scrollIntoView({behavior:"smooth", block:"center"});
-  }
-
-  function submit(){
-    if (!validate()) { errEl.textContent="Compila i campi obbligatori e accetta la privacy."; return; }
-    errEl.textContent="";
-    var d = { date:dateEl.value, slot:slotEl.value, persone:peopleEl.value, nome:nameEl.value.trim(), tel:phoneEl.value.trim(), codice:codice() };
-    if (!C.sheetUrl) { showSuccess(d); return; }
-
-    ctaEl.disabled=true; ctaEl.textContent="Invio in corso…";
-    var body = new URLSearchParams({
-      data:d.date, ora:d.slot, persone:d.persone, nome:d.nome, telefono:d.tel,
-      richieste:"Coupon " + d.codice, privacy:"Sì", marketing:(marketingEl.checked?"Sì":"No"),
-      offerta:C.offerTag, coupon:d.codice
-    });
-    fetch(C.sheetUrl, {method:"POST", mode:"no-cors", body:body})
-      .then(function(){ showSuccess(d); })
-      .catch(function(){
-        ctaEl.disabled=false; ctaEl.textContent="Prenota un tavolo";
-        errEl.textContent="Connessione assente. Chiamaci per bloccare l'offerta: " + C.phone;
-      });
-  }
-
-  dateEl.addEventListener("change", renderSlots);
-  [slotEl, peopleEl, privacyEl].forEach(function(e){ e.addEventListener("change", validate); });
-  [nameEl, phoneEl].forEach(function(e){ e.addEventListener("input", validate); });
-  ctaEl.addEventListener("click", submit);
-  renderSlots();
 })();
 </script>
 </body>
