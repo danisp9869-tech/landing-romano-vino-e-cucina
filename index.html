@@ -230,6 +230,28 @@ a{color:inherit}
 .foot a:hover{color:var(--gold)}
 @media (max-width:600px){.foot{flex-direction:column;align-items:flex-start;gap:10px;padding:24px 20px}}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+// Pixel di Romano Vino e Cucina. Eventi: PageView qui; InitiateCheckout quando
+// si va verso il widget Dinevo (script in fondo); Purchase lo manda lo script
+// Dinevo a prenotazione confermata.
+// Le CTA saltano a #coupon: senza questo Meta conterebbe un PageView in più a ogni clic.
+fbq.disablePushState = true;
+fbq('init', '2512457392565542');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -404,6 +426,23 @@ a{color:inherit}
   function aggiorna(){ nav.classList.toggle("scrolled", window.scrollY > 40); }
   aggiorna();
   window.addEventListener("scroll", aggiorna, {passive:true});
+})();
+
+/* Meta Pixel — InitiateCheckout, una volta sola per visita: quando si clicca una
+   CTA che porta al widget Dinevo, oppure quando si inizia a usare il widget
+   (l'iframe prende il focus: i clic dentro l'iframe non si vedono da qui). */
+(function () {
+  var inviato = false;
+  function checkout(){
+    if (inviato) return; inviato = true;
+    try { if (typeof fbq === "function") fbq("track", "InitiateCheckout"); } catch (e) {}
+  }
+  document.querySelectorAll('a[href="#coupon"]').forEach(function (a) { a.addEventListener("click", checkout); });
+  window.addEventListener("blur", function () {
+    setTimeout(function () {
+      if (document.activeElement && document.activeElement.id === "dinevo-booking") checkout();
+    }, 0);
+  });
 })();
 
 /* ====== CONFIG: cambia SOLO questo blocco ====== */
