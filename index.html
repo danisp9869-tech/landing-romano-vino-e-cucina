@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Primi romani 2x1 — Romano Vino e Cucina, Roma San Giovanni</title>
-<meta name="description" content="Offerta esclusiva da Romano Vino e Cucina, Via Taranto a San Giovanni (Roma): ordina due primi tipici romani, uno te lo offriamo noi. Solo 25 coupon, fino a fine ottobre.">
+<meta name="description" content="Offerta esclusiva da Romano Vino e Cucina, Via Taranto a San Giovanni (Roma): ordina due primi tipici romani, uno te lo offriamo noi. Pochi tavoli rimasti, fino a fine ottobre.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
 }
 html{scroll-behavior:smooth}
 /* offset per il nav fisso: le ancore non finiscono sotto la barra */
-#offerta,#coupon{scroll-margin-top:88px}
+#offerta,#prenota{scroll-margin-top:88px}
 body{background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -63,7 +63,7 @@ a{color:inherit}
 .hero h1,.hero .riga-2x1{font-size:clamp(52px,7.2vw,108px);text-shadow:0 2px 10px rgba(0,0,0,.85),0 4px 40px rgba(0,0,0,.7)}
 /* seconda riga del titolo più piccola: è lunga, a piena misura andrebbe su tre righe */
 .hero h1 .l2{display:block;color:var(--gold);font-size:.56em;margin-top:.18em}
-/* "Prendi 2 primi, ne paghi 1." è l'offerta: deve vincere su tutto. Targa oro
+/* "Paghi 1, ne mangi 2." è l'offerta: deve vincere su tutto. Targa oro
    piena con scritta bordeaux, niente ombra sul testo (sul pieno non serve) e
    un alone scuro intorno per staccarla dalla foto. */
 .hero .riga-2x1{margin:14px 0 24px}
@@ -94,7 +94,7 @@ a{color:inherit}
 /* CTA dell'hero più grande degli altri bottoni: è la prima azione della pagina */
 .hero .hero-cta{font-size:19px;padding:13px 26px;line-height:1.2}
 
-/* contatore coupon sotto il titolo, prima della CTA dell'hero */
+/* scarsità sotto il titolo, prima della CTA dell'hero */
 .scarsita{display:flex;flex-direction:column;align-items:center;gap:14px;margin:0 auto 28px;max-width:420px}
 /* riga semplice senza box, come "Offerta valida solo online" nelle landing I Love Meat */
 .contatore{color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.85)}
@@ -243,7 +243,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 // Pixel di Romano Vino e Cucina. Eventi: PageView qui; InitiateCheckout quando
 // si va verso il widget Dinevo (script in fondo); Purchase lo manda lo script
 // Dinevo a prenotazione confermata.
-// Le CTA saltano a #coupon: senza questo Meta conterebbe un PageView in più a ogni clic.
+// Le CTA saltano a #prenota: senza questo Meta conterebbe un PageView in più a ogni clic.
 fbq.disablePushState = true;
 fbq('init', '2512457392565542');
 fbq('track', 'PageView');
@@ -258,7 +258,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
 <!-- NAV -->
 <nav class="nav">
   <a class="logo" href="#" aria-label="Romano Vino e Cucina"><img src="logo.png" alt="Romano Vino e Cucina" width="236" height="114"></a>
-  <a class="btn" href="#coupon">Prenota un tavolo</a>
+  <a class="btn" href="#prenota">Prenota un tavolo</a>
 </nav>
 
 <!-- HERO -->
@@ -268,27 +268,27 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
     <span class="badge"><span class="dot"></span>Offerta esclusiva · fino a fine ottobre</span>
     <h1 class="display">Voi magnà romano?<br><span class="l2">Allora siedite e famo le cose serie.</span></h1>
     <p class="lead">Vieni a provà i veri primi romani:</p>
-    <p class="display riga-2x1"><span class="l2">Prendi <em>2</em> primi,<br class="a-capo"> ne paghi <em>1</em>.<a class="bollino" href="#coupon"><span>Prendi<br>coupon!</span></a></span></p>
+    <p class="display riga-2x1"><span class="l2">Paghi <em>1</em>,<br class="a-capo"> ne mangi <em>2</em>.<a class="bollino" href="#prenota"><span>Prendi<br>l'offerta!</span></a></span></p>
 
     <div class="scarsita">
-      <p class="contatore"><span class="js-rimasti">25</span> coupon disponibili</p>
+      <p class="contatore">Pochi tavoli rimasti</p>
     </div>
 
-    <a class="btn hero-cta" href="#coupon">Prenota un tavolo e prendi l'offerta</a>
+    <a class="btn hero-cta" href="#prenota">Prenota un tavolo e prendi l'offerta</a>
   </div>
 </header>
 
-<!-- COUPON -->
+<!-- PRENOTAZIONE -->
 <section class="section book-sec">
   <div class="wrap">
     <div class="sec-head book-head">
-      <h2 class="display">Prenota il tuo tavolo<br><span class="l2">e prendi il tuo coupon</span></h2>
-      <p class="book-intro">Il coupon è valido <b>solo nella data inserita nella tua prenotazione</b>: compilando il form riservi un tavolo a tuo nome.</p>
-      <span class="badge"><span class="dot"></span>Pochi coupon rimasti</span>
+      <h2 class="display">Prenota il tuo tavolo<br><span class="l2">e prendi l'offerta</span></h2>
+      <p class="book-intro">L'offerta è valida <b>solo nella data inserita nella tua prenotazione</b>: compilando il form riservi un tavolo a tuo nome.</p>
+      <span class="badge"><span class="dot"></span>Pochi tavoli rimasti</span>
     </div>
 
     <!-- Prenotazioni: widget Dinevo con la promozione "Primi romani 2x1" -->
-    <div class="book-embed" id="coupon">
+    <div class="book-embed" id="prenota">
       <iframe
         id="dinevo-booking"
         src="https://api.dinevo.it/embed/r/est_0cb98578-b4b6-463b-bad3-2b3c8f035711?promotion=promo_68e65ba4-290c-440c-8a81-c98c47ec65da"
@@ -314,7 +314,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
           });
         }
       </script>
-      <p class="cta-nota">Il coupon è valido nella data inserita nel form.</p>
+      <p class="cta-nota">L'offerta è valida nella data inserita nel form.</p>
     </div>
   </div>
 </section>
@@ -335,7 +335,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
         </div>
       </div>
       <aside class="offer-prezzo">
-        <span class="etichetta">Prendi il tuo coupon per il primo in omaggio</span>
+        <span class="etichetta">Prenota un tavolo per il primo in omaggio</span>
         <span class="price">2x1</span>
         <span class="sub">Ne ordini due, il secondo è offerto da noi</span>
         <div class="rule"></div>
@@ -348,8 +348,8 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
             <div><b id="cd-s">--</b><small>sec</small></div>
           </div>
         </div>
-        <a class="btn" href="#coupon">Prenota un tavolo</a>
-        <p class="valida">Solo <span class="js-totali">25</span> coupon · valido fino al 31 ottobre</p>
+        <a class="btn" href="#prenota">Prenota un tavolo</a>
+        <p class="valida">Pochi tavoli rimasti · valida fino al 31 ottobre</p>
       </aside>
     </div>
   </div>
@@ -363,7 +363,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
       <h2 class="display">Tre passi, <span class="l2">un primo gratis</span></h2>
     </div>
     <div class="passi">
-      <div class="passo"><span class="n">1</span><h3>Riservi un tavolo nel form</h3><p>Scegli giorno, orario e quante persone, lascia nome e telefono: il coupon è tuo. <b>Vale solo nel giorno che hai prenotato.</b></p></div>
+      <div class="passo"><span class="n">1</span><h3>Riservi un tavolo nel form</h3><p>Scegli giorno, orario e quante persone, lascia nome e telefono: l'offerta è tua. <b>Vale solo nel giorno che hai prenotato.</b></p></div>
       <div class="passo"><span class="n">2</span><h3>Ordina i tuoi primi romani</h3><p>Scegli due primi tra carbonara, cacio e pepe, amatriciana e gricia.</p></div>
       <div class="passo"><span class="n">3</span><h3>Ottieni un primo in regalo</h3><p>Fai vedere la tua prenotazione in cassa e ricevi un primo in omaggio.</p></div>
     </div>
@@ -385,7 +385,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
     </div>
     <figure class="racconto-foto"><img src="tavola-vino.jpg" alt="Rigatoni e calici di vino rosso a lume di candela da Romano Vino e Cucina" loading="lazy"></figure>
     </div>
-    <div class="cta-row"><a class="btn" href="#coupon">Prenota un tavolo</a></div>
+    <div class="cta-row"><a class="btn" href="#prenota">Prenota un tavolo</a></div>
   </div>
 </section>
 
@@ -437,7 +437,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
     if (inviato) return; inviato = true;
     try { if (typeof fbq === "function") fbq("track", "InitiateCheckout"); } catch (e) {}
   }
-  document.querySelectorAll('a[href="#coupon"]').forEach(function (a) { a.addEventListener("click", checkout); });
+  document.querySelectorAll('a[href="#prenota"]').forEach(function (a) { a.addEventListener("click", checkout); });
   window.addEventListener("blur", function () {
     setTimeout(function () {
       if (document.activeElement && document.activeElement.id === "dinevo-booking") checkout();
@@ -448,10 +448,6 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
 /* ====== CONFIG: cambia SOLO questo blocco ====== */
 window.LP_CONFIG = {
   phone: "+393402154732",
-  couponTotali: 25,
-  // Coupon ancora disponibili: si aggiorna A MANO man mano che vengono richiesti.
-  // A 0 il widget di prenotazione si chiude da solo.
-  couponRimasti: 25,
   // Ultimo giorno valido (incluso): dopo questa data il widget si chiude.
   scadenza: "2026-10-31"
 };
@@ -461,11 +457,6 @@ window.LP_CONFIG = {
   var $ = function (id) { return document.getElementById(id); };
   var p = C.scadenza.split("-");
   var FINE = new Date(+p[0], +p[1]-1, +p[2], 23, 59, 59);   // fine giornata, ora locale
-
-  /* --- contatore coupon --- */
-  var rimasti = Math.max(0, Math.min(C.couponRimasti, C.couponTotali));
-  document.querySelectorAll(".js-rimasti").forEach(function(e){ e.textContent = rimasti; });
-  document.querySelectorAll(".js-totali").forEach(function(e){ e.textContent = C.couponTotali; });
 
   /* --- countdown alla scadenza --- */
   function due(n){ return (n < 10 ? "0" : "") + n; }
@@ -479,11 +470,11 @@ window.LP_CONFIG = {
   }
   tick(); setInterval(tick, 1000);
 
-  var bookEl = $("coupon");
+  var bookEl = $("prenota");
 
-  /* --- offerta finita (scaduta o coupon esauriti): il widget di prenotazione sparisce --- */
-  if (new Date() > FINE || rimasti <= 0) {
-    bookEl.innerHTML = '<div class="book"><div class="chiusa"><h3>' + (rimasti <= 0 ? "Coupon esauriti" : "Offerta terminata") +
+  /* --- offerta scaduta: il widget di prenotazione sparisce --- */
+  if (new Date() > FINE) {
+    bookEl.innerHTML = '<div class="book"><div class="chiusa"><h3>Offerta terminata' +
       '</h3><p>Grazie a tutti! Per prenotare un tavolo chiamaci al <a href="tel:' + C.phone + '">' + C.phone.replace("+39", "+39 ") + '</a>.</p></div></div>';
     return;
   }
