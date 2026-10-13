@@ -241,7 +241,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 // Pixel di Romano Vino e Cucina. Eventi: PageView qui; InitiateCheckout quando
-// si va verso il widget Dinevo (script in fondo); Purchase lo manda lo script
+// si va verso il widget Dinevo (script in fondo); Schedule lo manda lo script
 // Dinevo a prenotazione confermata.
 // Le CTA saltano a #prenota: senza questo Meta conterebbe un PageView in più a ogni clic.
 fbq.disablePushState = true;
@@ -305,14 +305,13 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
           if (!reduce) frame.style.transition = 'height 0.2s ease';
           frame.style.height = event.data.height + 'px';
         });
-        if (typeof window.fbq === 'function') {
-          window.addEventListener('message', function (event) {
-            if (!event.data || event.data.type !== 'dinevo:booking-confirmed') return;
-            var frame = document.getElementById('dinevo-booking');
-            if (!frame || event.source !== frame.contentWindow) return;
-            window.fbq('track', 'Purchase', { value: 0, currency: 'EUR' });
-          });
-        }
+        window.addEventListener('message', function (event) {
+          if (!event.data || event.data.type !== 'dinevo:booking-confirmed') return;
+          if (typeof window.fbq !== 'function') return;
+          var frame = document.getElementById('dinevo-booking');
+          if (!frame || event.source !== frame.contentWindow) return;
+          window.fbq('track', 'Schedule');
+        });
       </script>
       <p class="cta-nota">L'offerta è valida nella data inserita nel form.</p>
     </div>
