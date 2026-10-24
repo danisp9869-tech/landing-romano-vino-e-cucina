@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Primi romani 2x1 — Romano Vino e Cucina, Roma San Giovanni</title>
-<meta name="description" content="Offerta esclusiva da Romano Vino e Cucina, Via Taranto a San Giovanni (Roma): ordina due primi tipici romani, uno te lo offriamo noi. Pochi tavoli rimasti, fino a fine ottobre.">
+<meta name="description" content="Offerta esclusiva da Romano Vino e Cucina, Via Taranto a San Giovanni (Roma): ordina due primi tipici romani, uno te lo offriamo noi. Pochi tavoli rimasti, fino a fine novembre.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,61 +41,62 @@ a{color:inherit}
 
 /* ---- NAV ---- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;background:transparent;border-bottom:1px solid transparent;transition:background .25s,border-color .25s}
-.nav.scrolled{background:rgba(28,10,16,.86);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+/* niente backdrop-filter: sopra il video dell'hero fa sballare il disegno del video su iPhone */
+.nav.scrolled{background:rgba(28,10,16,.95);border-bottom-color:var(--line)}
 /* logo ufficiale (targa bordeaux con scritta panna): alto 48px, largo in proporzione */
 .nav .logo{display:block;line-height:0}
 .nav .logo img{height:48px;width:auto;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .nav .btn{padding:11px 22px;font-size:17px}
 
 /* ---- HERO ---- */
-/* Se hero.jpg manca, resta il fondo bordeaux sfumato: la pagina sta in piedi
-   anche senza foto. */
-.hero{position:relative;overflow:hidden;min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:104px 0 60px;
+/* Se video e immagine mancano, resta il fondo bordeaux sfumato: la pagina sta
+   in piedi anche senza. */
+/* l'hero (col video) riempie tutta la prima schermata, su mobile e su desktop.
+   100svh = altezza visibile del telefono con le barre del browser aperte: con 100vh
+   su iPhone il fondo finirebbe sotto la barra di Safari */
+.hero{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:104px 0 60px;
   background:radial-gradient(90% 70% at 50% 30%,#5a1323,#2a0c14 60%,var(--bg))}
-/* foto verticale (tre primi dall'alto): su schermi larghi "cover" taglia sopra
-   e sotto, quindi tengo l'inquadratura sopra il centro, dove stanno i piatti,
-   e il logo in fondo alla foto resta fuori. */
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:brightness(.62) saturate(1.1) contrast(1.04);z-index:0}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%;filter:brightness(.62) saturate(1.1) contrast(1.04);z-index:0}
+/* video di sfondo: carbonara in padella, quadrato 1080x1080 in loop continuo.
+   Finché non parte, o se JS è spento, resta il suo primo fotogramma come foto. */
+.hero-video{display:none}
+.hero.con-video .hero-video{display:block}
+/* IMPORTANTE: sul <video> niente filter né mask-image. Su iPhone con filtri o
+   maschere il fotogramma ogni tanto viene ridisegnato piccolo e spostato dentro un
+   riquadro nero. Lo scurimento lo fa la velatura .hero.con-video::before. */
+video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
+  top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover}
+/* sopra il video c'è il suo primo fotogramma come immagine: copre il video finché
+   non gira davvero. NB: non nascondere mai il <video> (opacity/visibility): iPhone
+   non fa partire da solo un video che considera invisibile. Si nasconde l'immagine. */
+.hero.con-video .hero-foto{filter:none;-webkit-mask-image:none;mask-image:none;
+  top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;opacity:1}
+.hero.video-in-onda .hero-foto{opacity:0}
+/* iPhone mostra un grosso pulsante play se l'autoplay è bloccato: lo nascondo */
+.hero-video::-webkit-media-controls,.hero-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
 /* velo bordeaux: tinge la foto con il colore del locale e tiene leggibile il copy */
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,8,18,.6),rgba(60,12,26,.35) 45%,rgba(28,10,16,.96) 97%)}
+/* col video la velatura fa anche lo scurimento che prima faceva il filtro: la
+   carbonara è molto chiara e gialla, serve più bordeaux perché le scritte si leggano */
+/* hero a tutto schermo: velatura leggera perché il video si veda bene, più scura
+   al centro dietro le scritte (alone ellittico) e sfumata scura in alto (dietro
+   logo e bottone) e in basso (verso la sezione sotto) */
+.hero.con-video::before{background:
+  radial-gradient(ellipse 75% 42% at 50% 52%,rgba(28,10,16,.42),rgba(28,10,16,0) 78%),
+  linear-gradient(180deg,rgba(28,10,16,.82) 0,rgba(40,8,18,.42) 18%,rgba(60,12,26,.32) 50%,rgba(40,8,18,.46) 74%,rgba(28,10,16,.97) 100%)}
 .hero-inner{position:relative;z-index:2;max-width:1120px}
-.hero .badge{margin-bottom:18px;background:rgba(28,10,16,.55);backdrop-filter:blur(4px)}
-.hero h1,.hero .riga-2x1{font-size:clamp(52px,7.2vw,108px);text-shadow:0 2px 10px rgba(0,0,0,.85),0 4px 40px rgba(0,0,0,.7)}
+.hero .badge{margin-bottom:18px;background:rgba(28,10,16,.72)}
+.hero h1{font-size:clamp(52px,7.2vw,108px);text-shadow:0 2px 10px rgba(0,0,0,.85),0 4px 40px rgba(0,0,0,.7)}
 /* seconda riga del titolo più piccola: è lunga, a piena misura andrebbe su tre righe */
+.hero h1 .oro{color:var(--gold)}
 .hero h1 .l2{display:block;color:var(--gold);font-size:.56em;margin-top:.18em}
-/* "Paghi 1, ne mangi 2." è l'offerta: deve vincere su tutto. Targa oro
-   piena con scritta bordeaux, niente ombra sul testo (sul pieno non serve) e
-   un alone scuro intorno per staccarla dalla foto. */
-.hero .riga-2x1{margin:14px 0 24px}
-.hero .riga-2x1 .l2{display:inline-block;font-size:.72em;line-height:1.05;color:var(--ink-cta);
-  background:linear-gradient(180deg,var(--gold-2),var(--gold));padding:.16em .5em .12em;border-radius:.16em;
-  text-shadow:none;box-shadow:0 0 0 3px rgba(224,191,107,.28),0 14px 40px rgba(0,0,0,.6);transform:rotate(-1.5deg)}
-.hero .riga-2x1 .l2 em{font-style:normal;color:var(--bordeaux)}
-/* bollino a stella bordeaux sull'angolo in alto a destra della targa: sticker
-   cliccabile che porta al form. Misure in px: la targa usa gli em del titolo. */
-/* spazio a destra nella targa: il bollino sta sull'angolo senza coprire il testo */
-.hero .riga-2x1 .l2{position:relative;padding-right:1.35em}
-.bollino{position:absolute;top:-50px;right:-72px;width:104px;height:104px;
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  font-family:"Anton","Arial Narrow",sans-serif;font-size:17px;font-weight:400;line-height:1;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;
-  color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35);filter:drop-shadow(0 6px 10px rgba(0,0,0,.55));
-  animation:bollino 1.6s ease-in-out infinite}
-/* sticker a stella: forma dentellata piena, bordeaux acceso, che pulsa */
-.bollino::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(160deg,#c0304f,var(--bordeaux) 75%);
-  clip-path:polygon(50.0% 0.0%,56.4% 9.5%,65.5% 2.4%,68.6% 13.5%,79.4% 9.5%,79.0% 21.0%,90.5% 20.6%,86.5% 31.4%,97.6% 34.5%,90.5% 43.6%,100.0% 50.0%,90.5% 56.4%,97.6% 65.5%,86.5% 68.6%,90.5% 79.4%,79.0% 79.0%,79.4% 90.5%,68.6% 86.5%,65.5% 97.6%,56.4% 90.5%,50.0% 100.0%,43.6% 90.5%,34.5% 97.6%,31.4% 86.5%,20.6% 90.5%,21.0% 79.0%,9.5% 79.4%,13.5% 68.6%,2.4% 65.5%,9.5% 56.4%,0.0% 50.0%,9.5% 43.6%,2.4% 34.5%,13.5% 31.4%,9.5% 20.6%,21.0% 21.0%,20.6% 9.5%,31.4% 13.5%,34.5% 2.4%,43.6% 9.5%)}
-.bollino span{position:relative;transform:rotate(-12deg)}
-@keyframes bollino{0%,100%{transform:rotate(12deg) scale(1)}50%{transform:rotate(12deg) scale(1.1)}}
-@media (prefers-reduced-motion:reduce){.bollino{animation:none;transform:rotate(12deg)}}
-.bollino:hover{animation-play-state:paused}
-/* a capo solo su mobile: così l'"1." non resta da solo sulla seconda riga */
-.hero .a-capo{display:none}
-.hero .lead{color:#f7ece4;font-size:19px;max-width:40ch;margin:20px auto 0;text-shadow:0 1px 6px rgba(0,0,0,.9),0 2px 20px rgba(0,0,0,.8)}
+.hero .lead{color:#f7ece4;font-size:19px;max-width:40ch;margin:20px auto 22px;text-shadow:0 1px 6px rgba(0,0,0,.9),0 2px 20px rgba(0,0,0,.8)}
 .hero .lead b{color:var(--gold-2)}
 /* CTA dell'hero più grande degli altri bottoni: è la prima azione della pagina */
 .hero .hero-cta{font-size:19px;padding:13px 26px;line-height:1.2}
 
-/* scarsità sotto il titolo, prima della CTA dell'hero */
-.scarsita{display:flex;flex-direction:column;align-items:center;gap:14px;margin:0 auto 28px;max-width:420px}
+/* scarsità sotto la CTA dell'hero */
+.scarsita{display:flex;flex-direction:column;align-items:center;gap:14px;margin:16px auto 0;max-width:420px}
 /* riga semplice senza box, come "Offerta valida solo online" nelle landing I Love Meat */
 .contatore{color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.85)}
 /* countdown: nel pannello dell'offerta, subito prima del bottone */
@@ -108,26 +109,29 @@ a{color:inherit}
 
 @media (max-width:600px){
   .wrap{padding:0 20px}
-  .nav{position:sticky;background:rgba(28,10,16,.86);backdrop-filter:blur(10px);border-bottom-color:var(--line);padding:12px 18px}
+  /* anche su mobile la barra è fissa e trasparente: il video dell'hero passa sotto
+     logo e bottone e arriva fino in cima; diventa scura quando si scorre */
+  .nav{padding:12px 18px}
   .nav .logo img{height:40px}
   .nav .btn{padding:10px 16px;font-size:15px}
-  .hero{min-height:auto;padding:36px 0 44px}
+  .hero{padding:96px 0 44px}
   .hero-bg{height:80%;-webkit-mask-image:linear-gradient(180deg,#000 66%,transparent 100%);mask-image:linear-gradient(180deg,#000 66%,transparent 100%)}
-  .hero h1,.hero .riga-2x1{font-size:clamp(40px,12vw,62px)}
+  /* col video: a tutta altezza e senza maschera (la sfumatura in fondo la fa la velatura) */
+  .hero.con-video .hero-bg{height:100%}
+  .hero h1{font-size:clamp(40px,12vw,62px)}
   .hero h1 .l2{font-size:.6em}
-  .hero .riga-2x1 .l2{font-size:.84em;padding:.16em .55em .12em}
-  .hero .a-capo{display:inline}
-  /* su mobile la targa è piena larghezza: il bollino sale sopra l'angolo e la
-     targa scende un po' per fargli spazio */
-  .hero .riga-2x1{margin-top:58px}
-  .hero .riga-2x1 .l2{padding-right:.55em}
-  .bollino{width:76px;height:76px;top:-62px;right:-26px;font-size:12.5px}
   .hero .lead{font-size:17px}
   .hero .badge{font-size:10px;letter-spacing:.03em;padding:6px 11px}
   .btn{font-size:15px;padding:12px 22px}
   .hero .hero-cta{font-size:16px;padding:12px 20px}
+  /* pillola del form: testo lungo, più piccola per stare su una riga */
+  .book-head .badge{font-size:10.5px;letter-spacing:.03em;padding:7px 12px}
   .countdown div{min-width:56px}
   .section{padding:30px 0}
+}
+@media (max-width:350px){
+  /* telefoni molto stretti: la pillola del form resta su una riga */
+  .book-head .badge{font-size:9.5px;letter-spacing:.01em;padding:6px 10px;gap:6px}
 }
 
 /* ---- SEZIONI ---- */
@@ -266,20 +270,58 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
 
 <!-- HERO -->
 <header class="hero">
-  <img class="hero-bg" src="hero.jpg" alt="Tre primi romani serviti da Romano Vino e Cucina: amatriciana, cacio e pepe e spaghetti al guanciale" onerror="this.style.display='none'">
+  <!-- video di sfondo: la sorgente la mette lo script in fondo (scarica il file intero prima di partire) -->
+  <video class="hero-bg hero-video" muted playsinline webkit-playsinline loop autoplay preload="none" disablepictureinpicture aria-hidden="true"></video>
+  <!-- primo fotogramma del video come immagine SOPRA il video: lo copre finché non gira -->
+  <img class="hero-bg hero-foto" src="hero-carbonara-v1.jpg" alt="Spaghetti alla carbonara mantecati in padella" onerror="this.style.display='none'">
   <div class="wrap hero-inner">
-    <span class="badge"><span class="dot"></span>Offerta esclusiva · fino a fine ottobre</span>
-    <h1 class="display">Voi magnà romano?<br><span class="l2">Allora siedite e famo le cose serie.</span></h1>
-    <p class="lead">Vieni a provà i veri primi romani:</p>
-    <p class="display riga-2x1"><span class="l2">Paghi <em>1</em>,<br class="a-capo"> ne mangi <em>2</em>.<a class="bollino" href="#prenota"><span>Prendi<br>l'offerta!</span></a></span></p>
-
-    <div class="scarsita">
-      <p class="contatore">Pochi tavoli rimasti</p>
-    </div>
+    <span class="badge"><span class="dot"></span>Offerta esclusiva · fino a fine novembre</span>
+    <h1 class="display">Vieni a provà i veri <span class="oro">primi romani</span></h1>
+    <p class="lead">Ordina due primi e <b>uno te lo offriamo noi</b>.</p>
 
     <a class="btn hero-cta" href="#prenota">Prenota un tavolo e prendi l'offerta</a>
+
+    <div class="scarsita">
+      <p class="contatore">Posti limitati</p>
+    </div>
   </div>
 </header>
+
+<!-- OFFERTA -->
+<section class="section sec-oro" id="offerta">
+  <div class="wrap">
+    <h2 class="offerta-titolo">Scegli i tuoi primi preferiti</h2>
+    <div class="offer">
+      <div class="offer-menu">
+        <p class="offer-kicker">Scegli i tuoi due primi</p>
+        <h3 class="offer-title-serif">Quattro classici, <em>come si fanno a Roma</em></h3>
+        <div class="primi">
+          <figure class="primo"><img src="primo-carbonara.jpg" alt="Spaghetti alla carbonara con guanciale e pecorino" loading="lazy"><figcaption><b>Carbonara</b><small>Guanciale croccante, tuorlo, pecorino romano e pepe</small></figcaption></figure>
+          <figure class="primo"><img src="primo-cacio-e-pepe.jpg" alt="Spaghetti cacio e pepe" loading="lazy"><figcaption><b>Cacio e pepe</b><small>Pecorino romano e pepe nero macinato al momento</small></figcaption></figure>
+          <figure class="primo"><img src="primo-amatriciana.jpg" alt="Rigatoni all'amatriciana con guanciale" loading="lazy"><figcaption><b>Amatriciana</b><small>Guanciale, pomodoro e pecorino</small></figcaption></figure>
+          <figure class="primo"><img src="primo-gricia.jpg" alt="Spaghetti alla gricia con guanciale e pecorino" loading="lazy"><figcaption><b>Gricia</b><small>Guanciale, pecorino romano e pepe</small></figcaption></figure>
+        </div>
+      </div>
+      <aside class="offer-prezzo">
+        <span class="etichetta">Prenota un tavolo e ottieni il primo in omaggio</span>
+        <span class="price">2x1</span>
+        <span class="sub">Ne ordini due, il secondo è offerto da noi</span>
+        <div class="rule"></div>
+        <div class="scadenza">
+          <span class="countdown-label">L'offerta scade tra</span>
+          <div class="countdown" aria-live="off">
+            <div><b id="cd-g">--</b><small>giorni</small></div>
+            <div><b id="cd-h">--</b><small>ore</small></div>
+            <div><b id="cd-m">--</b><small>min</small></div>
+            <div><b id="cd-s">--</b><small>sec</small></div>
+          </div>
+        </div>
+        <a class="btn" href="#prenota">Prenota un tavolo</a>
+        <p class="valida">Pochi tavoli rimasti · valida fino al 30 novembre</p>
+      </aside>
+    </div>
+  </div>
+</section>
 
 <!-- PRENOTAZIONE -->
 <section class="section book-sec">
@@ -287,7 +329,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
     <div class="sec-head book-head">
       <h2 class="display">Prenota il tuo tavolo<br><span class="l2">e prendi l'offerta</span></h2>
       <p class="book-intro">L'offerta è valida <b>solo nella data inserita nella tua prenotazione</b>: compilando il form riservi un tavolo a tuo nome.</p>
-      <span class="badge"><span class="dot"></span>Pochi tavoli rimasti</span>
+      <span class="badge"><span class="dot"></span>Per i veri amanti della cucina romana</span>
     </div>
 
     <!-- Prenotazioni: widget Dinevo con la promozione "Primi romani 2x1" -->
@@ -323,42 +365,6 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
         });
       </script>
       <p class="cta-nota">L'offerta è valida nella data inserita nel form.</p>
-    </div>
-  </div>
-</section>
-
-<!-- OFFERTA -->
-<section class="section sec-oro" id="offerta">
-  <div class="wrap">
-    <h2 class="offerta-titolo">Scegli i tuoi primi preferiti</h2>
-    <div class="offer">
-      <div class="offer-menu">
-        <p class="offer-kicker">Scegli i tuoi due primi</p>
-        <h3 class="offer-title-serif">Quattro classici, <em>come si fanno a Roma</em></h3>
-        <div class="primi">
-          <figure class="primo"><img src="primo-carbonara.jpg" alt="Spaghetti alla carbonara con guanciale e pecorino" loading="lazy"><figcaption><b>Carbonara</b><small>Guanciale croccante, tuorlo, pecorino romano e pepe</small></figcaption></figure>
-          <figure class="primo"><img src="primo-cacio-e-pepe.jpg" alt="Spaghetti cacio e pepe" loading="lazy"><figcaption><b>Cacio e pepe</b><small>Pecorino romano e pepe nero macinato al momento</small></figcaption></figure>
-          <figure class="primo"><img src="primo-amatriciana.jpg" alt="Rigatoni all'amatriciana con guanciale" loading="lazy"><figcaption><b>Amatriciana</b><small>Guanciale, pomodoro e pecorino</small></figcaption></figure>
-          <figure class="primo"><img src="primo-gricia.jpg" alt="Spaghetti alla gricia con guanciale e pecorino" loading="lazy"><figcaption><b>Gricia</b><small>Guanciale, pecorino romano e pepe</small></figcaption></figure>
-        </div>
-      </div>
-      <aside class="offer-prezzo">
-        <span class="etichetta">Prenota un tavolo per il primo in omaggio</span>
-        <span class="price">2x1</span>
-        <span class="sub">Ne ordini due, il secondo è offerto da noi</span>
-        <div class="rule"></div>
-        <div class="scadenza">
-          <span class="countdown-label">L'offerta scade tra</span>
-          <div class="countdown" aria-live="off">
-            <div><b id="cd-g">--</b><small>giorni</small></div>
-            <div><b id="cd-h">--</b><small>ore</small></div>
-            <div><b id="cd-m">--</b><small>min</small></div>
-            <div><b id="cd-s">--</b><small>sec</small></div>
-          </div>
-        </div>
-        <a class="btn" href="#prenota">Prenota un tavolo</a>
-        <p class="valida">Pochi tavoli rimasti · valida fino al 31 ottobre</p>
-      </aside>
     </div>
   </div>
 </section>
@@ -436,6 +442,62 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
   window.addEventListener("scroll", aggiorna, {passive:true});
 })();
 
+/* Video dell'hero: "video carbonara" (28 s, 1080x1080) reso loop continuo: tolto il
+   primo secondo e sfumata la fine nell'inizio, 1 Mbit/s, 27 s, 3,6 MB.
+   - Lo scarico TUTTO prima di farlo partire: con 4G debole, se va in streaming si
+     ferma ad aspettare dati e iPhone in quelle pause lo disegna piccolo e spostato.
+   - Sopra il video c'è il suo primo fotogramma come immagine: sparisce quando il
+     video gira davvero e torna se si ferma o ricomincia il giro.
+   - Con Risparmio energetico/dati il telefono blocca l'autoplay: parte al primo
+     tocco o scorrimento.
+   - Nome file nuovo a ogni cambio del video: sulla VPS i media hanno cache lunga. */
+(function () {
+  var v = document.querySelector(".hero-video");
+  if (!v) return;
+  var url = "hero-carbonara-v1.mp4";
+  var hero = document.querySelector(".hero");
+  v.muted = true; v.defaultMuted = true; v.setAttribute("muted", "");
+  v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
+  hero.classList.add("con-video");
+
+  function avvia(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+  function mostra(){ hero.classList.add("video-in-onda"); }
+  function nascondi(){ hero.classList.remove("video-in-onda"); }
+  v.addEventListener("playing", mostra);
+  v.addEventListener("waiting", nascondi);
+  v.addEventListener("stalled", function(){ if (v.readyState < 3) nascondi(); });
+  v.addEventListener("pause", nascondi);
+  // riavvio del loop: Safari salta all'inizio e in quell'istante disegna male il
+  // video; lo nascondo durante il salto (sotto c'è proprio il primo fotogramma)
+  v.addEventListener("seeking", nascondi);
+  v.addEventListener("seeked", function(){ if (!v.paused) mostra(); });
+  v.addEventListener("timeupdate", function(){
+    if (!v.paused && v.readyState >= 3 && !hero.classList.contains("video-in-onda")) mostra();
+  });
+
+  function carica(sorgente){
+    v.preload = "auto";
+    v.src = sorgente;
+    v.load(); avvia();
+    v.addEventListener("canplay", function(){ if (v.paused) avvia(); });
+  }
+  if (window.fetch && window.URL && URL.createObjectURL) {
+    fetch(url).then(function(r){ if (!r.ok) throw 0; return r.blob(); })
+      .then(function(b){ carica(URL.createObjectURL(b)); })
+      .catch(function(){ carica(url); });
+  } else { carica(url); }
+
+  function alPrimoGesto(){ if (v.src && v.paused) avvia(); }
+  ["touchstart", "touchend", "click", "scroll"].forEach(function(ev){
+    window.addEventListener(ev, alPrimoGesto, { passive: true });
+  });
+  v.addEventListener("playing", function(){
+    ["touchstart", "touchend", "click", "scroll"].forEach(function(ev){
+      window.removeEventListener(ev, alPrimoGesto);
+    });
+  });
+})();
+
 /* Meta Pixel — InitiateCheckout, una volta sola per visita: quando si clicca una
    CTA che porta al widget Dinevo, oppure quando si inizia a usare il widget
    (l'iframe prende il focus: i clic dentro l'iframe non si vedono da qui). */
@@ -457,7 +519,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
 window.LP_CONFIG = {
   phone: "+393402154732",
   // Ultimo giorno valido (incluso): dopo questa data il widget si chiude.
-  scadenza: "2026-10-31"
+  scadenza: "2026-11-30"
 };
 
 (function () {
