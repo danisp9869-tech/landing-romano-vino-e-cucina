@@ -57,7 +57,7 @@ a{color:inherit}
 .hero{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:104px 0 60px;
   background:radial-gradient(90% 70% at 50% 30%,#5a1323,#2a0c14 60%,var(--bg))}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%;filter:brightness(.62) saturate(1.1) contrast(1.04);z-index:0}
-/* video di sfondo: carbonara in padella, quadrato 1080x1080 in loop continuo.
+/* video di sfondo: carbonara saltata in padella, verticale 1080x1350 in loop continuo.
    Finché non parte, o se JS è spento, resta il suo primo fotogramma come foto. */
 .hero-video{display:none}
 .hero.con-video .hero-video{display:block}
@@ -273,7 +273,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
   <!-- video di sfondo: la sorgente la mette lo script in fondo (scarica il file intero prima di partire) -->
   <video class="hero-bg hero-video" muted playsinline webkit-playsinline loop autoplay preload="none" disablepictureinpicture aria-hidden="true"></video>
   <!-- primo fotogramma del video come immagine SOPRA il video: lo copre finché non gira -->
-  <img class="hero-bg hero-foto" src="hero-carbonara-v1.jpg" alt="Spaghetti alla carbonara mantecati in padella" onerror="this.style.display='none'">
+  <img class="hero-bg hero-foto" src="hero-carbonara-salta-v1.jpg" alt="Spaghetti alla carbonara con guanciale saltati in padella" onerror="this.style.display='none'">
   <div class="wrap hero-inner">
     <span class="badge"><span class="dot"></span>Offerta esclusiva · fino a fine novembre</span>
     <h1 class="display">Vieni a provà i veri <span class="oro">primi romani</span></h1>
@@ -442,8 +442,8 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
   window.addEventListener("scroll", aggiorna, {passive:true});
 })();
 
-/* Video dell'hero: "video carbonara" (28 s, 1080x1080) reso loop continuo: tolto il
-   primo secondo e sfumata la fine nell'inizio, 1 Mbit/s, 27 s, 3,6 MB.
+/* Video dell'hero: "carbonara che salta" (5,4 s, 1080x1350, verticale 4:5) reso loop
+   continuo: tolti i primi 0,8 s e sfumata la fine nell'inizio, 4,6 s, 1,7 MB.
    - Lo scarico TUTTO prima di farlo partire: con 4G debole, se va in streaming si
      ferma ad aspettare dati e iPhone in quelle pause lo disegna piccolo e spostato.
    - Sopra il video c'è il suo primo fotogramma come immagine: sparisce quando il
@@ -454,7 +454,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
 (function () {
   var v = document.querySelector(".hero-video");
   if (!v) return;
-  var url = "hero-carbonara-v1.mp4";
+  var url = "hero-carbonara-salta-v1.mp4";
   var hero = document.querySelector(".hero");
   v.muted = true; v.defaultMuted = true; v.setAttribute("muted", "");
   v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
