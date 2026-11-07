@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Primi romani 2x1 — Romano Vino e Cucina, Roma San Giovanni</title>
-<meta name="description" content="Offerta esclusiva da Romano Vino e Cucina, Via Taranto a San Giovanni (Roma): ordina due primi tipici romani, uno te lo offriamo noi. Pochi tavoli rimasti, fino a fine novembre.">
+<title>Romano Vino e Cucina — La vera cucina romana a San Giovanni, Roma</title>
+<meta name="description" content="Da Romano famo sul serio: la vera cucina romana a San Giovanni, con piatti tipici, materia prima di qualità e una carta di vini, bollicine e champagne. Prenota un tavolo in Via Taranto 8/10/12, Roma.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* Romano Vino e Cucina — landing "Primi romani 2x1".
+/* Romano Vino e Cucina — landing "Da Romano famo sul serio" (prenotazioni, niente offerte).
    Stessa struttura delle landing I Love Meat, palette bordeaux + oro. */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -25,7 +25,7 @@
 }
 html{scroll-behavior:smooth}
 /* offset per il nav fisso: le ancore non finiscono sotto la barra */
-#offerta,#prenota{scroll-margin-top:88px}
+#cucina,#prenota{scroll-margin-top:88px}
 body{background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -57,7 +57,7 @@ a{color:inherit}
 .hero{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:104px 0 60px;
   background:radial-gradient(90% 70% at 50% 30%,#5a1323,#2a0c14 60%,var(--bg))}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%;filter:brightness(.62) saturate(1.1) contrast(1.04);z-index:0}
-/* video di sfondo: carbonara saltata in padella, verticale 1080x1350 in loop continuo.
+/* video di sfondo: la carbonara impiattata in cucina, verticale 1080x1920 in loop continuo.
    Finché non parte, o se JS è spento, resta il suo primo fotogramma come foto. */
 .hero-video{display:none}
 .hero.con-video .hero-video{display:block}
@@ -79,33 +79,30 @@ video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
 /* col video la velatura fa anche lo scurimento che prima faceva il filtro: la
    carbonara è molto chiara e gialla, serve più bordeaux perché le scritte si leggano */
 /* hero a tutto schermo: velatura leggera perché il video si veda bene, più scura
-   al centro dietro le scritte (alone ellittico) e sfumata scura in alto (dietro
+   al centro dietro le scritte (alone ellittico, tarato sul video "video hero": al
+   centro è chiaro, luminosità fino a 150/255) e sfumata scura in alto (dietro
    logo e bottone) e in basso (verso la sezione sotto) */
 .hero.con-video::before{background:
-  radial-gradient(ellipse 75% 42% at 50% 52%,rgba(28,10,16,.42),rgba(28,10,16,0) 78%),
-  linear-gradient(180deg,rgba(28,10,16,.82) 0,rgba(40,8,18,.42) 18%,rgba(60,12,26,.32) 50%,rgba(40,8,18,.46) 74%,rgba(28,10,16,.97) 100%)}
+  radial-gradient(ellipse 78% 44% at 50% 50%,rgba(28,10,16,.56),rgba(28,10,16,0) 80%),
+  linear-gradient(180deg,rgba(28,10,16,.82) 0,rgba(40,8,18,.44) 18%,rgba(60,12,26,.38) 50%,rgba(40,8,18,.48) 74%,rgba(28,10,16,.97) 100%)}
 .hero-inner{position:relative;z-index:2;max-width:1120px}
-.hero .badge{margin-bottom:18px;background:rgba(28,10,16,.72)}
-.hero h1{font-size:clamp(52px,7.2vw,108px);text-shadow:0 2px 10px rgba(0,0,0,.85),0 4px 40px rgba(0,0,0,.7)}
+/* indirizzo sotto la CTA dell'hero: apre la mappa */
+.hero .hero-via{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;color:#f3e6dc;font-size:14px;font-weight:600;letter-spacing:.02em;text-decoration:none;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 12px rgba(0,0,0,.9),0 0 26px rgba(28,10,16,.85)}
+.hero .hero-via svg{width:16px;height:16px;fill:var(--gold-2);flex:0 0 auto}
+.hero .hero-via:hover{color:#fff;text-decoration:underline}
+/* riga piccola sopra il titolo */
+.hero .hero-kicker{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold-2);font-size:clamp(19px,2.2vw,26px);margin-bottom:10px;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 14px rgba(0,0,0,.9),0 0 34px rgba(28,10,16,.85)}
+/* ombre marcate dietro le scritte dell'hero: una stretta per il contorno, una larga
+   bordeaux che fa da alone scuro sul video chiaro */
+.hero h1{font-size:clamp(52px,7.2vw,108px);text-shadow:0 2px 4px rgba(0,0,0,.9),0 4px 18px rgba(0,0,0,.85),0 0 50px rgba(28,10,16,.9)}
 /* seconda riga del titolo più piccola: è lunga, a piena misura andrebbe su tre righe */
 .hero h1 .oro{color:var(--gold)}
 .hero h1 .l2{display:block;color:var(--gold);font-size:.56em;margin-top:.18em}
-.hero .lead{color:#f7ece4;font-size:19px;max-width:40ch;margin:20px auto 22px;text-shadow:0 1px 6px rgba(0,0,0,.9),0 2px 20px rgba(0,0,0,.8)}
+.hero .lead{color:#f7ece4;font-size:19px;max-width:40ch;margin:20px auto 22px;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 14px rgba(0,0,0,.9),0 0 30px rgba(28,10,16,.9)}
 .hero .lead b{color:var(--gold-2)}
 /* CTA dell'hero più grande degli altri bottoni: è la prima azione della pagina */
 .hero .hero-cta{font-size:19px;padding:13px 26px;line-height:1.2}
 
-/* scarsità sotto la CTA dell'hero */
-.scarsita{display:flex;flex-direction:column;align-items:center;gap:14px;margin:16px auto 0;max-width:420px}
-/* riga semplice senza box, come "Offerta valida solo online" nelle landing I Love Meat */
-.contatore{color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.85)}
-/* countdown: nel pannello dell'offerta, subito prima del bottone */
-.scadenza{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:24px}
-.countdown{display:flex;gap:10px;justify-content:center}
-.countdown div{min-width:62px;background:rgba(28,10,16,.6);border:1px solid var(--line);border-radius:10px;padding:8px 6px}
-.countdown b{display:block;font-family:"Anton",sans-serif;font-weight:400;font-size:24px;line-height:1;color:var(--text)}
-.countdown small{display:block;margin-top:4px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.countdown-label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
 
 @media (max-width:600px){
   .wrap{padding:0 20px}
@@ -126,7 +123,6 @@ video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
   .hero .hero-cta{font-size:16px;padding:12px 20px}
   /* pillola del form: testo lungo, più piccola per stare su una riga */
   .book-head .badge{font-size:10.5px;letter-spacing:.03em;padding:7px 12px}
-  .countdown div{min-width:56px}
   .section{padding:30px 0}
 }
 @media (max-width:350px){
@@ -140,33 +136,28 @@ video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
 .sec-head h2{font-size:clamp(30px,5.2vw,56px);margin-top:6px}
 .sec-head h2 .l2{color:var(--gold)}
 /* sezione dei primi su fondo oro: stacca dal form e dalle sezioni scure;
-   la card bordeaux dell'offerta ci sta sopra come un menu su tovaglia */
+   la card bordeaux dei primi ci sta sopra come un menu su tovaglia */
 .sec-oro{background:linear-gradient(180deg,var(--gold-2),var(--gold));padding:52px 0}
 .sec-oro .offerta-titolo{color:var(--ink-cta)}
 .sec-oro .offer{box-shadow:0 24px 60px rgba(60,20,10,.45)}
 .offerta-titolo{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(26px,3.3vw,40px);line-height:1.08;margin-bottom:22px;text-align:center}
 
-/* ---- OFFERTA: menu a sinistra, 2x1 a destra ---- */
-.offer{position:relative;display:grid;grid-template-columns:1.15fr .85fr;background:linear-gradient(160deg,#35121e,#1f0a11 72%);border:1px solid rgba(201,162,74,.3);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+/* ---- LA NOSTRA CUCINA: i quattro primi con le foto ---- */
+.offer{position:relative;display:block;background:linear-gradient(160deg,#35121e,#1f0a11 72%);border:1px solid rgba(201,162,74,.3);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
 .offer::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% -10%,rgba(201,162,74,.12),transparent 60%)}
 .offer-menu{position:relative;z-index:1;padding:46px 44px}
 .offer-kicker{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
 .offer-title-serif{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.9vw,34px);line-height:1.12;margin-bottom:26px}
 .offer-title-serif em{font-style:italic;color:var(--gold)}
 /* i quattro primi: card con foto quadrata e didascalia, 2x2 */
-.primi{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.primi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.offer .cta-row{margin-top:28px}
+@media (max-width:900px){.primi{grid-template-columns:1fr 1fr}}
 .primo{border-radius:14px;overflow:hidden;background:rgba(28,10,16,.55);border:1px solid rgba(201,162,74,.2)}
 .primo img{width:100%;aspect-ratio:4/3;object-fit:cover}
 .primo figcaption{padding:12px 14px 14px}
 .primo b{display:block;font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.15;color:#fbf3ea}
 .primo small{display:block;margin-top:4px;color:var(--muted);font-size:13px;line-height:1.45}
-.offer-prezzo{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:46px 34px;background:rgba(122,26,46,.28);border-left:1px solid rgba(201,162,74,.2)}
-.offer-prezzo .etichetta{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
-.offer-prezzo .price{font-family:"Anton",sans-serif;color:var(--gold);font-size:clamp(90px,12vw,140px);line-height:.95}
-.offer-prezzo .sub{font-family:var(--serif);font-style:italic;color:var(--text);font-size:21px;margin-top:6px;max-width:22ch}
-.offer-prezzo .rule{width:56px;height:1px;background:rgba(201,162,74,.5);margin:24px 0}
-.offer-prezzo .btn{width:100%;max-width:300px}
-.offer-prezzo .valida{margin-top:14px;color:var(--muted);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;line-height:1.6}
 @media (max-width:760px){
   .offer{grid-template-columns:1fr}
   .offer-menu{padding:32px 20px}
@@ -174,14 +165,12 @@ video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
   .primo figcaption{padding:10px 11px 12px}
   .primo b{font-size:18px}
   .primo small{font-size:12px}
-  .offer-prezzo{padding:32px 24px;border-left:none;border-top:1px solid rgba(201,162,74,.2)}
 }
 
-/* ---- COME FUNZIONA ---- */
+/* ---- PERCHÉ ROMANO: tre card bianche ---- */
 .passi{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 /* card bianche come le recensioni delle landing I Love Meat: testo scuro, titolo bordeaux */
 .passo{background:#fff;color:#2a0c14;border-radius:var(--radius);padding:28px 24px;box-shadow:0 12px 34px rgba(0,0,0,.35)}
-.passo .n{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--bordeaux);color:var(--gold-2);font-family:"Anton",sans-serif;font-size:20px;margin-bottom:14px;border:1px solid rgba(201,162,74,.4)}
 .passo h3{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--bordeaux);margin-bottom:6px}
 .passo p{color:#5f4b4d;font-size:15.5px}
 .passo p b{color:var(--bordeaux);font-weight:700}
@@ -205,13 +194,6 @@ video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
 .book-intro b{color:var(--gold-2);font-weight:700}
 .book-embed{max-width:560px;margin:0 auto}
 .book-embed iframe{display:block;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.cta-nota{margin-top:12px;text-align:center;color:#cdb9b3;font-size:12.5px}
-/* card bianca mostrata al posto del widget quando l'offerta è finita */
-.book{--ink:#2a0c14;--ink-soft:#735a5c;
-  max-width:520px;margin:0 auto;background:#fff;border:1px solid #eadfd6;border-radius:20px;padding:22px;color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.chiusa{text-align:center;padding:18px 6px}
-.chiusa h3{font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;font-size:24px;margin-bottom:8px}
-.chiusa p{color:var(--ink-soft)}
 
 /* ---- TROVACI QUI ---- */
 .find-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
@@ -273,70 +255,31 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
   <!-- video di sfondo: la sorgente la mette lo script in fondo (scarica il file intero prima di partire) -->
   <video class="hero-bg hero-video" muted playsinline webkit-playsinline loop autoplay preload="none" disablepictureinpicture aria-hidden="true"></video>
   <!-- primo fotogramma del video come immagine SOPRA il video: lo copre finché non gira -->
-  <img class="hero-bg hero-foto" src="hero-carbonara-salta-v1.jpg" alt="Spaghetti alla carbonara con guanciale saltati in padella" onerror="this.style.display='none'">
+  <img class="hero-bg hero-foto" src="hero-romano-v1.jpg" alt="Carbonara impiattata nella cucina di Romano Vino e Cucina" onerror="this.style.display='none'">
   <div class="wrap hero-inner">
-    <span class="badge"><span class="dot"></span>Offerta esclusiva · fino a fine novembre</span>
-    <h1 class="display">Vieni a provà i veri <span class="oro">primi romani</span></h1>
-    <p class="lead">Ordina due primi e <b>uno te lo offriamo noi</b>.</p>
+    <p class="hero-kicker">Non hai ancora trovato la vera cucina romana?</p>
+    <h1 class="display">Da Romano <span class="oro">famo sul serio</span></h1>
+    <p class="lead">L'unica vera cucina romana, con <b>piatti tipici</b>, <b>materia prima di qualità</b> e l'esperienza che ci contraddistingue.</p>
 
-    <a class="btn hero-cta" href="#prenota">Prenota un tavolo e prendi l'offerta</a>
-
-    <div class="scarsita">
-      <p class="contatore">Posti limitati</p>
-    </div>
+    <a class="btn hero-cta" href="#prenota">Prenota un tavolo</a>
+    <a class="hero-via" href="https://www.google.com/maps/search/?api=1&query=Romano+Vino+e+Cucina+Via+Taranto+8+Roma" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Via Taranto 8/10/12 · San Giovanni, Roma</a>
   </div>
 </header>
-
-<!-- OFFERTA -->
-<section class="section sec-oro" id="offerta">
-  <div class="wrap">
-    <h2 class="offerta-titolo">Scegli i tuoi primi preferiti</h2>
-    <div class="offer">
-      <div class="offer-menu">
-        <p class="offer-kicker">Scegli i tuoi due primi</p>
-        <h3 class="offer-title-serif">Quattro classici, <em>come si fanno a Roma</em></h3>
-        <div class="primi">
-          <figure class="primo"><img src="primo-carbonara.jpg" alt="Spaghetti alla carbonara con guanciale e pecorino" loading="lazy"><figcaption><b>Carbonara</b><small>Guanciale croccante, tuorlo, pecorino romano e pepe</small></figcaption></figure>
-          <figure class="primo"><img src="primo-cacio-e-pepe.jpg" alt="Spaghetti cacio e pepe" loading="lazy"><figcaption><b>Cacio e pepe</b><small>Pecorino romano e pepe nero macinato al momento</small></figcaption></figure>
-          <figure class="primo"><img src="primo-amatriciana.jpg" alt="Rigatoni all'amatriciana con guanciale" loading="lazy"><figcaption><b>Amatriciana</b><small>Guanciale, pomodoro e pecorino</small></figcaption></figure>
-          <figure class="primo"><img src="primo-gricia.jpg" alt="Spaghetti alla gricia con guanciale e pecorino" loading="lazy"><figcaption><b>Gricia</b><small>Guanciale, pecorino romano e pepe</small></figcaption></figure>
-        </div>
-      </div>
-      <aside class="offer-prezzo">
-        <span class="etichetta">Prenota un tavolo e ottieni il primo in omaggio</span>
-        <span class="price">2x1</span>
-        <span class="sub">Ne ordini due, il secondo è offerto da noi</span>
-        <div class="rule"></div>
-        <div class="scadenza">
-          <span class="countdown-label">L'offerta scade tra</span>
-          <div class="countdown" aria-live="off">
-            <div><b id="cd-g">--</b><small>giorni</small></div>
-            <div><b id="cd-h">--</b><small>ore</small></div>
-            <div><b id="cd-m">--</b><small>min</small></div>
-            <div><b id="cd-s">--</b><small>sec</small></div>
-          </div>
-        </div>
-        <a class="btn" href="#prenota">Prenota un tavolo</a>
-        <p class="valida">Pochi tavoli rimasti · valida fino al 30 novembre</p>
-      </aside>
-    </div>
-  </div>
-</section>
 
 <!-- PRENOTAZIONE -->
 <section class="section book-sec">
   <div class="wrap">
     <div class="sec-head book-head">
-      <h2 class="display">Prenota il tuo tavolo<br><span class="l2">e prendi l'offerta</span></h2>
-      <p class="book-intro">L'offerta è valida <b>solo nella data inserita nella tua prenotazione</b>: compilando il form riservi un tavolo a tuo nome.</p>
+      <h2 class="display">Prenota<br><span class="l2">il tuo tavolo</span></h2>
+      <p class="book-intro">Scegli giorno, orario e quante persone: in un minuto il tavolo è <b>riservato a tuo nome</b>.</p>
       <span class="badge"><span class="dot"></span>Per i veri amanti della cucina romana</span>
     </div>
 
-    <!-- Prenotazioni: widget Dinevo con la promozione "Primi romani 2x1" -->
+    <!-- Prenotazioni: widget Dinevo (senza promozione: l'offerta 2x1 è finita) -->
     <div class="book-embed" id="prenota">
       <iframe
         id="dinevo-booking"
-        src="https://api.dinevo.it/embed/r/est_0cb98578-b4b6-463b-bad3-2b3c8f035711?promotion=promo_68e65ba4-290c-440c-8a81-c98c47ec65da"
+        src="https://api.dinevo.it/embed/r/est_0cb98578-b4b6-463b-bad3-2b3c8f035711"
         title="Prenota un tavolo"
         height="900"
         style="width: 100%; border: 0; border-radius: 22px; overflow: hidden"
@@ -364,22 +307,41 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
           window.fbq('track', 'Schedule', {}, { eventID: id });
         });
       </script>
-      <p class="cta-nota">L'offerta è valida nella data inserita nel form.</p>
     </div>
   </div>
 </section>
 
-<!-- COME FUNZIONA -->
+<!-- LA NOSTRA CUCINA -->
+<section class="section sec-oro" id="cucina">
+  <div class="wrap">
+    <h2 class="offerta-titolo">I più famosi: i nostri primi</h2>
+    <div class="offer">
+      <div class="offer-menu">
+        <p class="offer-kicker">La nostra cucina</p>
+        <h3 class="offer-title-serif">Quattro classici, <em>come si fanno a Roma</em></h3>
+        <div class="primi">
+          <figure class="primo"><img src="primo-carbonara.jpg" alt="Spaghetti alla carbonara con guanciale e pecorino" loading="lazy"><figcaption><b>Carbonara</b><small>Guanciale croccante, tuorlo, pecorino romano e pepe</small></figcaption></figure>
+          <figure class="primo"><img src="primo-cacio-e-pepe.jpg" alt="Spaghetti cacio e pepe" loading="lazy"><figcaption><b>Cacio e pepe</b><small>Pecorino romano e pepe nero macinato al momento</small></figcaption></figure>
+          <figure class="primo"><img src="primo-amatriciana.jpg" alt="Rigatoni all'amatriciana con guanciale" loading="lazy"><figcaption><b>Amatriciana</b><small>Guanciale, pomodoro e pecorino</small></figcaption></figure>
+          <figure class="primo"><img src="primo-gricia.jpg" alt="Spaghetti alla gricia con guanciale e pecorino" loading="lazy"><figcaption><b>Gricia</b><small>Guanciale, pecorino romano e pepe</small></figcaption></figure>
+        </div>
+        <div class="cta-row"><a class="btn" href="#prenota">Prenota un tavolo</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERCHÉ ROMANO -->
 <section class="section">
   <div class="wrap">
     <div class="sec-head">
-      <span class="kicker">Come funziona</span>
-      <h2 class="display">Tre passi, <span class="l2">un primo gratis</span></h2>
+      <span class="kicker">Perché Romano</span>
+      <h2 class="display">La differenza <span class="l2">si sente a tavola</span></h2>
     </div>
     <div class="passi">
-      <div class="passo"><span class="n">1</span><h3>Riservi un tavolo nel form</h3><p>Scegli giorno, orario e quante persone, lascia nome e telefono: l'offerta è tua. <b>Vale solo nel giorno che hai prenotato.</b></p></div>
-      <div class="passo"><span class="n">2</span><h3>Ordina i tuoi primi romani</h3><p>Scegli due primi tra carbonara, cacio e pepe, amatriciana e gricia.</p></div>
-      <div class="passo"><span class="n">3</span><h3>Ottieni un primo in regalo</h3><p>Fai vedere la tua prenotazione in cassa e ricevi un primo in omaggio.</p></div>
+      <div class="passo"><h3>Piatti tipici</h3><p>Carbonara, cacio e pepe, amatriciana e gricia: la cucina romana come si fa a casa, senza scorciatoie.</p></div>
+      <div class="passo"><h3>Materia prima di qualità</h3><p>Guanciale, pecorino romano e ingredienti scelti con cura, per sapori veri in ogni piatto.</p></div>
+      <div class="passo"><h3>L'esperienza Romano</h3><p>Un locale caldo e accogliente a San Giovanni, con una carta di vini, bollicine e champagne per accompagnare ogni piatto.</p></div>
     </div>
   </div>
 </section>
@@ -395,7 +357,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
     <div class="racconto">
       <p class="racconto-lead">A due passi da San Giovanni, una cucina che parla romano: i primi della tradizione, una cantina curata e il tempo giusto per goderseli.</p>
       <p>Da <b>Romano Vino e Cucina</b> trovi i piatti che hanno fatto la storia della cucina di Roma, accompagnati da una <b>selezione di vini, bollicine e champagne</b>, taglieri di salumi e formaggi.</p>
-      <p>Con questa offerta porti qualcuno a tavola e il secondo primo lo offriamo noi. Pranzo o cena, scegli tu.</p>
+      <p>A pranzo, a cena o per un aperitivo: da Romano trovi sempre <b>Roma a tavola</b>.</p>
     </div>
     <figure class="racconto-foto"><img src="tavola-vino.jpg" alt="Rigatoni e calici di vino rosso a lume di candela da Romano Vino e Cucina" loading="lazy"></figure>
     </div>
@@ -442,8 +404,9 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
   window.addEventListener("scroll", aggiorna, {passive:true});
 })();
 
-/* Video dell'hero: "carbonara che salta" (5,4 s, 1080x1350, verticale 4:5) reso loop
-   continuo: tolti i primi 0,8 s e sfumata la fine nell'inizio, 4,6 s, 1,7 MB.
+/* Video dell'hero: "video hero" (14,5 s, 1080x1920, verticale 9:16, girato in cucina;
+   contiene due stacchi di montaggio voluti a 3,9 s e 9,4 s). Reso loop continuo: tolti i
+   primi 0,8 s e sfumata la fine nell'inizio, audio tolto, 1,3 Mbit/s, 13,7 s, 2,2 MB.
    - Lo scarico TUTTO prima di farlo partire: con 4G debole, se va in streaming si
      ferma ad aspettare dati e iPhone in quelle pause lo disegna piccolo e spostato.
    - Sopra il video c'è il suo primo fotogramma come immagine: sparisce quando il
@@ -454,7 +417,7 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
 (function () {
   var v = document.querySelector(".hero-video");
   if (!v) return;
-  var url = "hero-carbonara-salta-v1.mp4";
+  var url = "hero-romano-v1.mp4";
   var hero = document.querySelector(".hero");
   v.muted = true; v.defaultMuted = true; v.setAttribute("muted", "");
   v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
@@ -515,41 +478,6 @@ src="https://www.facebook.com/tr?id=2512457392565542&ev=PageView&noscript=1"
   });
 })();
 
-/* ====== CONFIG: cambia SOLO questo blocco ====== */
-window.LP_CONFIG = {
-  phone: "+393402154732",
-  // Ultimo giorno valido (incluso): dopo questa data il widget si chiude.
-  scadenza: "2026-11-30"
-};
-
-(function () {
-  var C = window.LP_CONFIG;
-  var $ = function (id) { return document.getElementById(id); };
-  var p = C.scadenza.split("-");
-  var FINE = new Date(+p[0], +p[1]-1, +p[2], 23, 59, 59);   // fine giornata, ora locale
-
-  /* --- countdown alla scadenza --- */
-  function due(n){ return (n < 10 ? "0" : "") + n; }
-  function tick(){
-    var ms = Math.max(0, FINE - new Date());
-    var s = Math.floor(ms / 1000);
-    $("cd-g").textContent = Math.floor(s / 86400);
-    $("cd-h").textContent = due(Math.floor(s % 86400 / 3600));
-    $("cd-m").textContent = due(Math.floor(s % 3600 / 60));
-    $("cd-s").textContent = due(s % 60);
-  }
-  tick(); setInterval(tick, 1000);
-
-  var bookEl = $("prenota");
-
-  /* --- offerta scaduta: il widget di prenotazione sparisce --- */
-  if (new Date() > FINE) {
-    bookEl.innerHTML = '<div class="book"><div class="chiusa"><h3>Offerta terminata' +
-      '</h3><p>Grazie a tutti! Per prenotare un tavolo chiamaci al <a href="tel:' + C.phone + '">' + C.phone.replace("+39", "+39 ") + '</a>.</p></div></div>';
-    return;
-  }
-
-})();
 </script>
 </body>
 </html>
