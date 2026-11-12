@@ -18,14 +18,14 @@
   --bg:#1c0a10;--bg2:#260e16;--card:#2e121b;--line:#4a1f2b;
   --bordeaux:#7a1a2e;--bordeaux-2:#9a2940;
   --text:#f6ede4;--muted:#b9a39e;
-  --gold:#c9a24a;--gold-2:#e0bf6b;--gold-d:#8a6a1e;
+  --gold:#f5c400;--gold-2:#ffd84a;--gold-d:#a37c00;
   --ink-cta:#2a0c14;
   --serif:"Playfair Display",Georgia,"Times New Roman",serif;
   --radius:16px
 }
 html{scroll-behavior:smooth}
 /* offset per il nav fisso: le ancore non finiscono sotto la barra */
-#cucina,#prenota{scroll-margin-top:88px}
+#prenota{scroll-margin-top:88px}
 body{background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -35,9 +35,9 @@ a{color:inherit}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border:none;border-radius:999px;background:#fff;color:var(--bordeaux);font-family:"Anton","Arial Narrow",sans-serif;font-size:18px;font-weight:400;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:.15s;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 /* CTA bianche con scritta bordeaux: si leggono sia sul fondo scuro sia sull'oro */
 .btn:hover{background:#f6ece4;transform:translateY(-1px)}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(201,162,74,.5);border-radius:999px;color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(201,162,74,.08)}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(245,196,0,.5);border-radius:999px;color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(245,196,0,.08)}
 .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 1.8s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,162,74,.55)}70%{box-shadow:0 0 0 7px rgba(201,162,74,0)}100%{box-shadow:0 0 0 0 rgba(201,162,74,0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,196,0,.55)}70%{box-shadow:0 0 0 7px rgba(245,196,0,0)}100%{box-shadow:0 0 0 0 rgba(245,196,0,0)}}
 
 /* ---- NAV ---- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;background:transparent;border-bottom:1px solid transparent;transition:background .25s,border-color .25s}
@@ -49,42 +49,21 @@ a{color:inherit}
 .nav .btn{padding:11px 22px;font-size:17px}
 
 /* ---- HERO ---- */
-/* Se video e immagine mancano, resta il fondo bordeaux sfumato: la pagina sta
+/* Se la foto manca, resta il fondo bordeaux sfumato: la pagina sta
    in piedi anche senza. */
-/* l'hero (col video) riempie tutta la prima schermata, su mobile e su desktop.
+/* l'hero (con la foto) riempie tutta la prima schermata, su mobile e su desktop.
    100svh = altezza visibile del telefono con le barre del browser aperte: con 100vh
    su iPhone il fondo finirebbe sotto la barra di Safari */
 .hero{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:104px 0 60px;
   background:radial-gradient(90% 70% at 50% 30%,#5a1323,#2a0c14 60%,var(--bg))}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%;filter:brightness(.62) saturate(1.1) contrast(1.04);z-index:0}
-/* video di sfondo: la carbonara impiattata in cucina, verticale 1080x1920 in loop continuo.
-   Finché non parte, o se JS è spento, resta il suo primo fotogramma come foto. */
-.hero-video{display:none}
-.hero.con-video .hero-video{display:block}
-/* IMPORTANTE: sul <video> niente filter né mask-image. Su iPhone con filtri o
-   maschere il fotogramma ogni tanto viene ridisegnato piccolo e spostato dentro un
-   riquadro nero. Lo scurimento lo fa la velatura .hero.con-video::before. */
-video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
-  top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover}
-/* sopra il video c'è il suo primo fotogramma come immagine: copre il video finché
-   non gira davvero. NB: non nascondere mai il <video> (opacity/visibility): iPhone
-   non fa partire da solo un video che considera invisibile. Si nasconde l'immagine. */
-.hero.con-video .hero-foto{filter:none;-webkit-mask-image:none;mask-image:none;
-  top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;opacity:1}
-.hero.video-in-onda .hero-foto{opacity:0}
-/* iPhone mostra un grosso pulsante play se l'autoplay è bloccato: lo nascondo */
-.hero-video::-webkit-media-controls,.hero-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
-/* velo bordeaux: tinge la foto con il colore del locale e tiene leggibile il copy */
-.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,8,18,.6),rgba(60,12,26,.35) 45%,rgba(28,10,16,.96) 97%)}
-/* col video la velatura fa anche lo scurimento che prima faceva il filtro: la
-   carbonara è molto chiara e gialla, serve più bordeaux perché le scritte si leggano */
-/* hero a tutto schermo: velatura leggera perché il video si veda bene, più scura
-   al centro dietro le scritte (alone ellittico, tarato sul video "video hero": al
-   centro è chiaro, luminosità fino a 150/255) e sfumata scura in alto (dietro
-   logo e bottone) e in basso (verso la sezione sotto) */
-.hero.con-video::before{background:
-  radial-gradient(ellipse 78% 44% at 50% 50%,rgba(28,10,16,.56),rgba(28,10,16,0) 80%),
-  linear-gradient(180deg,rgba(28,10,16,.82) 0,rgba(40,8,18,.44) 18%,rgba(60,12,26,.38) 50%,rgba(40,8,18,.48) 74%,rgba(28,10,16,.97) 100%)}
+/* foto di sfondo: tavolata di amici davanti all'apericena (quadrata 1254x1254).
+   Su desktop è tagliata sopra e sotto: centrata un po' in alto per tenere i volti. */
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;z-index:0}
+/* velatura: scura in alto (dietro logo e bottone) e in fondo (verso la sezione sotto),
+   alone scuro al centro dietro le scritte, che stanno sopra la tavola apparecchiata */
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:
+  radial-gradient(ellipse 80% 46% at 50% 50%,rgba(28,10,16,.6),rgba(28,10,16,0) 80%),
+  linear-gradient(180deg,rgba(28,10,16,.8) 0,rgba(40,8,18,.45) 18%,rgba(60,12,26,.4) 50%,rgba(40,8,18,.5) 74%,rgba(28,10,16,.97) 100%)}
 .hero-inner{position:relative;z-index:2;max-width:1120px}
 /* indirizzo sotto la CTA dell'hero: apre la mappa */
 .hero .hero-via{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;color:#f3e6dc;font-size:14px;font-weight:600;letter-spacing:.02em;text-decoration:none;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 12px rgba(0,0,0,.9),0 0 26px rgba(28,10,16,.85)}
@@ -93,28 +72,31 @@ video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
 /* riga piccola sopra il titolo */
 .hero .hero-kicker{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold-2);font-size:clamp(19px,2.2vw,26px);margin-bottom:10px;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 14px rgba(0,0,0,.9),0 0 34px rgba(28,10,16,.85)}
 /* ombre marcate dietro le scritte dell'hero: una stretta per il contorno, una larga
-   bordeaux che fa da alone scuro sul video chiaro */
+   bordeaux che fa da alone scuro sulla foto */
 .hero h1{font-size:clamp(52px,7.2vw,108px);text-shadow:0 2px 4px rgba(0,0,0,.9),0 4px 18px rgba(0,0,0,.85),0 0 50px rgba(28,10,16,.9)}
 /* seconda riga del titolo più piccola: è lunga, a piena misura andrebbe su tre righe */
 .hero h1 .oro{color:var(--gold)}
 .hero h1 .l2{display:block;color:var(--gold);font-size:.56em;margin-top:.18em}
 .hero .lead{color:#f7ece4;font-size:19px;max-width:40ch;margin:20px auto 22px;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 14px rgba(0,0,0,.9),0 0 30px rgba(28,10,16,.9)}
 .hero .lead b{color:var(--gold-2)}
+/* prezzo: 25€ oro, più grande del resto della frase */
+.hero .prezzo{white-space:nowrap}
+.hero .prezzo b{font-family:"Anton","Arial Narrow",sans-serif;font-weight:400;font-size:1.6em;letter-spacing:.01em;vertical-align:-.08em}
+/* "Fino a fine anno": riga corta oro sotto il bottone */
+.hero .hero-min{margin:6px 0 0;color:#f3e6dc;font-size:14px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 12px rgba(0,0,0,.9)}
+.hero .hero-fino{margin:14px 0 0;color:var(--gold-2);font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 12px rgba(0,0,0,.9)}
 /* CTA dell'hero più grande degli altri bottoni: è la prima azione della pagina */
 .hero .hero-cta{font-size:19px;padding:13px 26px;line-height:1.2}
 
 
 @media (max-width:600px){
   .wrap{padding:0 20px}
-  /* anche su mobile la barra è fissa e trasparente: il video dell'hero passa sotto
+  /* anche su mobile la barra è fissa e trasparente: la foto dell'hero passa sotto
      logo e bottone e arriva fino in cima; diventa scura quando si scorre */
   .nav{padding:12px 18px}
   .nav .logo img{height:40px}
   .nav .btn{padding:10px 16px;font-size:15px}
   .hero{padding:96px 0 44px}
-  .hero-bg{height:80%;-webkit-mask-image:linear-gradient(180deg,#000 66%,transparent 100%);mask-image:linear-gradient(180deg,#000 66%,transparent 100%)}
-  /* col video: a tutta altezza e senza maschera (la sfumatura in fondo la fa la velatura) */
-  .hero.con-video .hero-bg{height:100%}
   .hero h1{font-size:clamp(40px,12vw,62px)}
   .hero h1 .l2{font-size:.6em}
   .hero .lead{font-size:17px}
@@ -135,38 +117,54 @@ video.hero-video{filter:none;-webkit-mask-image:none;mask-image:none;
 .sec-head{text-align:center;margin-bottom:26px}
 .sec-head h2{font-size:clamp(30px,5.2vw,56px);margin-top:6px}
 .sec-head h2 .l2{color:var(--gold)}
-/* sezione dei primi su fondo oro: stacca dal form e dalle sezioni scure;
-   la card bordeaux dei primi ci sta sopra come un menu su tovaglia */
-.sec-oro{background:linear-gradient(180deg,var(--gold-2),var(--gold));padding:52px 0}
-.sec-oro .offerta-titolo{color:var(--ink-cta)}
-.sec-oro .offer{box-shadow:0 24px 60px rgba(60,20,10,.45)}
-.offerta-titolo{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(26px,3.3vw,40px);line-height:1.08;margin-bottom:22px;text-align:center}
 
-/* ---- LA NOSTRA CUCINA: i quattro primi con le foto ---- */
-.offer{position:relative;display:block;background:linear-gradient(160deg,#35121e,#1f0a11 72%);border:1px solid rgba(201,162,74,.3);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.offer::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% -10%,rgba(201,162,74,.12),transparent 60%)}
-.offer-menu{position:relative;z-index:1;padding:46px 44px}
-.offer-kicker{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
-.offer-title-serif{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.9vw,34px);line-height:1.12;margin-bottom:26px}
-.offer-title-serif em{font-style:italic;color:var(--gold)}
-/* i quattro primi: card con foto quadrata e didascalia, 2x2 */
-.primi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.offer .cta-row{margin-top:28px}
-@media (max-width:900px){.primi{grid-template-columns:1fr 1fr}}
-.primo{border-radius:14px;overflow:hidden;background:rgba(28,10,16,.55);border:1px solid rgba(201,162,74,.2)}
-.primo img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.primo figcaption{padding:12px 14px 14px}
-.primo b{display:block;font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.15;color:#fbf3ea}
-.primo small{display:block;margin-top:4px;color:var(--muted);font-size:13px;line-height:1.45}
+/* ---- APERICENA: i piatti, divisi in due sezioni ---- */
+.menu-intro{max-width:52ch;margin:14px auto 0;font-size:17px;line-height:1.6}
+.gruppi{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.gruppo{border-radius:var(--radius);padding:24px 22px}
+.gruppo h3{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.15;margin-bottom:4px}
+.gruppo p{font-size:14px;line-height:1.5;margin-bottom:12px}
+.gruppo ul{list-style:none}
+.gruppo li{padding:9px 0 9px 18px;position:relative;font-size:16px;font-weight:500;line-height:1.35}
+.gruppo li::before{content:"";position:absolute;left:2px;top:15px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.gruppo li+li{border-top:1px dashed}
+/* prima sezione: fondo panna, card bianche, testo bordeaux */
+.menu-sec.chiaro{background:#f5efe1;color:#2a0c14}
+.menu-sec.chiaro .sec-head h2{color:#2a0c14}
+.menu-sec.chiaro .sec-head h2 .l2{color:var(--bordeaux)}
+.menu-sec.chiaro .kicker{color:var(--gold-d)}
+.menu-sec.chiaro .menu-intro{color:#5f4b4d}
+.menu-sec.chiaro .gruppo{background:#fff;box-shadow:0 10px 28px rgba(60,20,10,.12)}
+.menu-sec.chiaro .gruppo h3{color:var(--bordeaux)}
+.menu-sec.chiaro .gruppo p{color:#7a6668}
+.menu-sec.chiaro .gruppo li+li{border-color:rgba(122,26,46,.16)}
+/* seconda sezione: fondo bordeaux, card scure con bordo oro, l'effetto "sorpresa" */
+.menu-sec.scuro{background:linear-gradient(180deg,#3a0f1b,#22090f)}
+.menu-sec.scuro .menu-intro{color:#e9dcd4}
+.menu-sec.scuro .gruppo{background:rgba(28,10,16,.55);border:1px solid rgba(245,196,0,.32)}
+.menu-sec.scuro .gruppo h3{color:var(--gold-2)}
+.menu-sec.scuro .gruppo p{color:var(--muted)}
+.menu-sec.scuro .gruppo li{color:#fbf3ea}
+.menu-sec.scuro .gruppo li+li{border-color:rgba(245,196,0,.18)}
+.menu-chiusura{text-align:center;margin-top:26px;font-family:var(--serif);font-style:italic;font-size:21px;color:var(--gold-2)}
+.menu-cta{text-align:center;margin-top:22px}
+.menu-cta p{color:#e9dcd4;font-size:17px;margin-bottom:14px}
+.menu-cta b{color:var(--gold-2)}
+.menu-cta .menu-min{display:inline-block;margin-top:6px;font-size:14px;color:var(--muted)}
+/* foto dell'apericena dentro le sezioni dei piatti */
+.foto-griglia{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:14px;margin:0 0 26px}
+.foto-griglia figure{border-radius:var(--radius);overflow:hidden;aspect-ratio:1/1;box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.foto-larga{max-width:920px;margin:0 auto 26px;border-radius:var(--radius);overflow:hidden;aspect-ratio:16/10;border:1px solid rgba(245,196,0,.35);box-shadow:0 14px 36px rgba(0,0,0,.4)}
+.foto-larga img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;display:block}
+.foto-griglia img{width:100%;height:100%;object-fit:cover;display:block}
 @media (max-width:760px){
-  .offer{grid-template-columns:1fr}
-  .offer-menu{padding:32px 20px}
-  .primi{gap:12px}
-  .primo figcaption{padding:10px 11px 12px}
-  .primo b{font-size:18px}
-  .primo small{font-size:12px}
+  .foto-griglia{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+  .foto-griglia figure:first-child{grid-column:1/-1}
+  .foto-larga{aspect-ratio:1/1;margin-bottom:20px}
+  .gruppi{grid-template-columns:1fr;gap:14px}
+  .gruppo{padding:20px 18px}
+  .menu-intro{font-size:16px}
 }
-
 /* ---- PERCHÉ ROMANO: tre card bianche ---- */
 .passi{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 /* card bianche come le recensioni delle landing I Love Meat: testo scuro, titolo bordeaux */
@@ -252,16 +250,15 @@ src="https://www.facebook.com/tr?id=4069897663315458&ev=PageView&noscript=1"
 
 <!-- HERO -->
 <header class="hero">
-  <!-- video di sfondo: la sorgente la mette lo script in fondo (scarica il file intero prima di partire) -->
-  <video class="hero-bg hero-video" muted playsinline webkit-playsinline loop autoplay preload="none" disablepictureinpicture aria-hidden="true"></video>
-  <!-- primo fotogramma del video come immagine SOPRA il video: lo copre finché non gira -->
-  <img class="hero-bg hero-foto" src="hero-romano-v1.jpg" alt="Carbonara impiattata nella cucina di Romano Vino e Cucina" onerror="this.style.display='none'">
+  <img class="hero-bg" src="hero-apericena-v1.jpg" alt="Una tavolata di amici davanti all'apericena di Romano Vino e Cucina" fetchpriority="high" onerror="this.style.display='none'">
   <div class="wrap hero-inner">
-    <p class="hero-kicker">Non hai ancora trovato la vera cucina romana?</p>
-    <h1 class="display">Da Romano <span class="oro">famo sul serio</span></h1>
-    <p class="lead">L'unica vera cucina romana, con <b>piatti tipici</b>, <b>materia prima di qualità</b> e l'esperienza che ci contraddistingue.</p>
+    <p class="hero-kicker">Vuoi provare i veri piatti romani ma non sai cosa scegliere?</p>
+    <h1 class="display">Apericena <span class="oro">più grande di Roma</span></h1>
+    <p class="lead"><b>30 piatti</b> della vera cucina romana<br>a <span class="prezzo"><b>25€</b></span></p>
 
-    <a class="btn hero-cta" href="#prenota">Prenota un tavolo</a>
+    <a class="btn hero-cta" href="#prenota">Prenota la tua apericena</a>
+    <p class="hero-fino">Fino a fine anno</p>
+    <p class="hero-min">Minimo 2 persone · Solo su prenotazione</p>
     <a class="hero-via" href="https://www.google.com/maps/search/?api=1&query=Romano+Vino+e+Cucina+Via+Taranto+8+Roma" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Via Taranto 8/10/12 · San Giovanni, Roma</a>
   </div>
 </header>
@@ -271,7 +268,7 @@ src="https://www.facebook.com/tr?id=4069897663315458&ev=PageView&noscript=1"
   <div class="wrap">
     <div class="sec-head book-head">
       <h2 class="display">Prenota<br><span class="l2">il tuo tavolo</span></h2>
-      <p class="book-intro">Scegli giorno, orario e quante persone: in un minuto il tavolo è <b>riservato a tuo nome</b>.</p>
+      <p class="book-intro">Scegli giorno, orario e quante persone (<b>minimo 2</b>): in un minuto il tavolo è <b>riservato a tuo nome</b>.</p>
       <span class="badge"><span class="dot"></span>Per i veri amanti della cucina romana</span>
     </div>
 
@@ -311,22 +308,101 @@ src="https://www.facebook.com/tr?id=4069897663315458&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- LA NOSTRA CUCINA -->
-<section class="section sec-oro" id="cucina">
+<!-- APERICENA 1: COSA TROVERAI -->
+<section class="section menu-sec chiaro">
   <div class="wrap">
-    <h2 class="offerta-titolo">I più famosi: i nostri primi</h2>
-    <div class="offer">
-      <div class="offer-menu">
-        <p class="offer-kicker">La nostra cucina</p>
-        <h3 class="offer-title-serif">Quattro classici, <em>come si fanno a Roma</em></h3>
-        <div class="primi">
-          <figure class="primo"><img src="primo-carbonara.jpg" alt="Spaghetti alla carbonara con guanciale e pecorino" loading="lazy"><figcaption><b>Carbonara</b><small>Guanciale croccante, tuorlo, pecorino romano e pepe</small></figcaption></figure>
-          <figure class="primo"><img src="primo-cacio-e-pepe.jpg" alt="Spaghetti cacio e pepe" loading="lazy"><figcaption><b>Cacio e pepe</b><small>Pecorino romano e pepe nero macinato al momento</small></figcaption></figure>
-          <figure class="primo"><img src="primo-amatriciana.jpg" alt="Rigatoni all'amatriciana con guanciale" loading="lazy"><figcaption><b>Amatriciana</b><small>Guanciale, pomodoro e pecorino</small></figcaption></figure>
-          <figure class="primo"><img src="primo-gricia.jpg" alt="Spaghetti alla gricia con guanciale e pecorino" loading="lazy"><figcaption><b>Gricia</b><small>Guanciale, pecorino romano e pepe</small></figcaption></figure>
+    <div class="sec-head">
+      <span class="kicker">L'apericena di Romano</span>
+      <h2 class="display">Cosa <span class="l2">troverai</span></h2>
+      <p class="menu-intro">Si comincia come si deve: un tagliere ricco, formaggi della tradizione e focacce da spezzare con le mani. Il primo assaggio di Roma.</p>
+    </div>
+    <div class="foto-griglia">
+      <figure><img src="apericena-tagliere.jpg" alt="Tagliere dell'apericena di Romano con prosciutto, mortadella, salame, ricottine e fagioli" loading="lazy"></figure>
+      <figure><img src="apericena-focacce.jpg" alt="Focacce alla curcuma e ai semi con salumi e pecorino" loading="lazy"></figure>
+      <figure><img src="apericena-formaggi.jpg" alt="Salumi, ricottine, cipolla caramellata e marmellate sul tagliere" loading="lazy"></figure>
+    </div>
+    <div class="gruppi">
+        <div class="gruppo">
+          <h3>I salumi</h3>
+          <p>Affettati da gustare con calma, uno dopo l'altro.</p>
+          <ul>
+          <li>Prosciutto di Parma</li>
+          <li>Mortadella con pistacchio</li>
+          <li>Salame</li>
+          <li>Pancetta arrotolata</li>
+          </ul>
         </div>
-        <div class="cta-row"><a class="btn" href="#prenota">Prenota un tavolo</a></div>
-      </div>
+        <div class="gruppo">
+          <h3>I formaggi</h3>
+          <p>Dai nodini freschi al pecorino deciso: un formaggio per ogni assaggio.</p>
+          <ul>
+          <li>Nodini di mozzarella</li>
+          <li>Ricottina di Andria</li>
+          <li>Caciotta romana</li>
+          <li>Pecorino</li>
+          </ul>
+        </div>
+        <div class="gruppo">
+          <h3>Focacce e abbinamenti</h3>
+          <p>Morbide, profumate, perfette con i formaggi e i loro abbinamenti.</p>
+          <ul>
+          <li>Focaccia olio e rosmarino</li>
+          <li>Focaccia alla curcuma</li>
+          <li>Focaccia ai semi</li>
+          <li>Cipolla caramellata</li>
+          <li>Miele e marmellate</li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- APERICENA 2: MA NON È FINITA -->
+<section class="section menu-sec scuro">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Ma non è finita</span>
+      <h2 class="display">Ora arriva <span class="l2">la cucina romana</span></h2>
+      <p class="menu-intro">Quando pensi di aver assaggiato tutto, dalla cucina arrivano i piatti che a Roma si mangiano da sempre: le polpette della nonna, la porchetta di Ariccia, la trippa e l'amatriciana. Ricette di casa, sapori pieni, niente scorciatoie.</p>
+    </div>
+    <figure class="foto-larga"><img src="apericena-completa.jpg" alt="L'apericena completa di Romano: salumi, formaggi, lasagna, involtini di melanzane e crostini" loading="lazy"></figure>
+    <div class="gruppi">
+        <div class="gruppo">
+          <h3>Dalla cucina</h3>
+          <p>I piatti caldi della tradizione, come li faceva la nonna.</p>
+          <ul>
+          <li>Polpettine della nonna</li>
+          <li>Porchetta di Ariccia</li>
+          <li>Trippa alla romana</li>
+          <li>Amatriciana</li>
+          <li>Lasagna al forno</li>
+          </ul>
+        </div>
+        <div class="gruppo">
+          <h3>I crostini</h3>
+          <p>Croccanti fuori, generosi sopra.</p>
+          <ul>
+          <li>Crostini ricotta e pomodorini</li>
+          <li>Crostini con melanzane</li>
+          <li>Crostini con formaggio e cipolla caramellata</li>
+          <li>Crostino con cicoria ripassata</li>
+          </ul>
+        </div>
+        <div class="gruppo">
+          <h3>Contorni e sfizi</h3>
+          <p>Quelli che fanno la differenza in tavola.</p>
+          <ul>
+          <li>Insalata di fagioli borlotti</li>
+          <li>Crema di ceci con guanciale</li>
+          <li>Patate arrosto</li>
+          <li>Involtini di melanzane al pomodoro</li>
+          </ul>
+        </div>
+    </div>
+    <p class="menu-chiusura">…e altri prodotti di stagione, che cambiano con il mercato.</p>
+    <div class="menu-cta">
+      <p><b>30 piatti</b> della vera cucina romana a <b>25€</b><br><span class="menu-min">Minimo 2 persone · Solo su prenotazione</span></p>
+      <a class="btn" href="#prenota">Prenota la tua apericena</a>
     </div>
   </div>
 </section>
@@ -359,9 +435,9 @@ src="https://www.facebook.com/tr?id=4069897663315458&ev=PageView&noscript=1"
       <p>Da <b>Romano Vino e Cucina</b> trovi i piatti che hanno fatto la storia della cucina di Roma, accompagnati da una <b>selezione di vini, bollicine e champagne</b>, taglieri di salumi e formaggi.</p>
       <p>A pranzo, a cena o per un aperitivo: da Romano trovi sempre <b>Roma a tavola</b>.</p>
     </div>
-    <figure class="racconto-foto"><img src="tavola-vino.jpg" alt="Rigatoni e calici di vino rosso a lume di candela da Romano Vino e Cucina" loading="lazy"></figure>
+    <figure class="racconto-foto"><img src="apericena-tavola.jpg" alt="Il tagliere dell'apericena servito al tavolo da Romano Vino e Cucina" loading="lazy"></figure>
     </div>
-    <div class="cta-row"><a class="btn" href="#prenota">Prenota un tavolo</a></div>
+    <div class="cta-row"><a class="btn" href="#prenota">Prenota la tua apericena</a></div>
   </div>
 </section>
 
@@ -402,63 +478,6 @@ src="https://www.facebook.com/tr?id=4069897663315458&ev=PageView&noscript=1"
   function aggiorna(){ nav.classList.toggle("scrolled", window.scrollY > 40); }
   aggiorna();
   window.addEventListener("scroll", aggiorna, {passive:true});
-})();
-
-/* Video dell'hero: "video hero" (14,5 s, 1080x1920, verticale 9:16, girato in cucina;
-   contiene due stacchi di montaggio voluti a 3,9 s e 9,4 s). Reso loop continuo: tolti i
-   primi 0,8 s e sfumata la fine nell'inizio, audio tolto, 1,3 Mbit/s, 13,7 s, 2,2 MB.
-   - Lo scarico TUTTO prima di farlo partire: con 4G debole, se va in streaming si
-     ferma ad aspettare dati e iPhone in quelle pause lo disegna piccolo e spostato.
-   - Sopra il video c'è il suo primo fotogramma come immagine: sparisce quando il
-     video gira davvero e torna se si ferma o ricomincia il giro.
-   - Con Risparmio energetico/dati il telefono blocca l'autoplay: parte al primo
-     tocco o scorrimento.
-   - Nome file nuovo a ogni cambio del video: sulla VPS i media hanno cache lunga. */
-(function () {
-  var v = document.querySelector(".hero-video");
-  if (!v) return;
-  var url = "hero-romano-v1.mp4";
-  var hero = document.querySelector(".hero");
-  v.muted = true; v.defaultMuted = true; v.setAttribute("muted", "");
-  v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
-  hero.classList.add("con-video");
-
-  function avvia(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-  function mostra(){ hero.classList.add("video-in-onda"); }
-  function nascondi(){ hero.classList.remove("video-in-onda"); }
-  v.addEventListener("playing", mostra);
-  v.addEventListener("waiting", nascondi);
-  v.addEventListener("stalled", function(){ if (v.readyState < 3) nascondi(); });
-  v.addEventListener("pause", nascondi);
-  // riavvio del loop: Safari salta all'inizio e in quell'istante disegna male il
-  // video; lo nascondo durante il salto (sotto c'è proprio il primo fotogramma)
-  v.addEventListener("seeking", nascondi);
-  v.addEventListener("seeked", function(){ if (!v.paused) mostra(); });
-  v.addEventListener("timeupdate", function(){
-    if (!v.paused && v.readyState >= 3 && !hero.classList.contains("video-in-onda")) mostra();
-  });
-
-  function carica(sorgente){
-    v.preload = "auto";
-    v.src = sorgente;
-    v.load(); avvia();
-    v.addEventListener("canplay", function(){ if (v.paused) avvia(); });
-  }
-  if (window.fetch && window.URL && URL.createObjectURL) {
-    fetch(url).then(function(r){ if (!r.ok) throw 0; return r.blob(); })
-      .then(function(b){ carica(URL.createObjectURL(b)); })
-      .catch(function(){ carica(url); });
-  } else { carica(url); }
-
-  function alPrimoGesto(){ if (v.src && v.paused) avvia(); }
-  ["touchstart", "touchend", "click", "scroll"].forEach(function(ev){
-    window.addEventListener(ev, alPrimoGesto, { passive: true });
-  });
-  v.addEventListener("playing", function(){
-    ["touchstart", "touchend", "click", "scroll"].forEach(function(ev){
-      window.removeEventListener(ev, alPrimoGesto);
-    });
-  });
 })();
 
 /* Meta Pixel — InitiateCheckout, una volta sola per visita: quando si clicca una
